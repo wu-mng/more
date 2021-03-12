@@ -1,6 +1,6 @@
 <header id="site-header" {% if site.data.navigation.fixed %} class="fixed" {% endif %}>
   <div class="wrapper flex-wrap">
-    <a href="/" class="site-title" aria-label="home page">{{ site.title }}</a>
+    <a href="{{ '/' | relative_url }}" class="site-title" aria-label="home page">{{ site.title }}</a>
     <nav id="site-nav">
       {% if site.data.navigation.hamburger %}
       <button class="hamburger" tabindex="-1">

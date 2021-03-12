@@ -7,9 +7,9 @@
       {% if page == paginator.page %}
       <span id="current-page">{{ page }}</span>
       {% elsif page == 1 %}
-      <a href="/" aria-label="Go to page {{ page }}">{{ page }}</a>  
+      <a href="{{ '/' | relative_url }}" aria-label="Go to page {{ page }}">{{ page }}</a>  
       {% else %}
-      <a href="/{{ page }}" aria-label="Go to page {{ page }}">{{ page }}</a>  
+      <a href="{{ '/' | relative_url }}{{ page }}" aria-label="Go to page {{ page }}">{{ page }}</a>  
       {% endif %}
     {% endfor %}
     {% if paginator.next_page %}

@@ -5,7 +5,7 @@ layout: default
   <header class="tagbox">
     <h1>Tags</h1>
     {% for tag in site.tags %}
-    <a href="#{{ tag[0] }}" class="tag" title="see articles tagged with {{ tag[0] }}" aria-label="see articles tagged with {{ tag[0] }}">
+    <a href="#{{ tag[0] }}" class="tag" title="see articles tagged with #{{ tag[0] }}" aria-label="see articles tagged with #{{ tag[0] }}">
       {{ tag[0] }}
     </a>
     {% endfor %}
