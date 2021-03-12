@@ -1,0 +1,16 @@
+{% comment %} 
+  filter posts by any variable in front matter. 
+  usage example: {% include archive.html key='categories' value='categoryname' %}
+  just list all post: {% include archive.html %}
+{% endcomment %}
+
+<ul class="posts-list">
+  {% assign filtered_posts = site.posts | where: include.key, include.value %}
+  {% for post in filtered_posts %}
+  <li>
+    <a href="{{ post.url | relative_url }}" title="click to read the article" aria-label='Read the article "{{ post.title }}"'>
+      {{ post.title | markdownify | smartify | remove: "<p>" | remove: "</p>" }}
+    </a>
+  </li>
+  {% endfor %}
+</ul>

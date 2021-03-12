@@ -1,0 +1,30 @@
+---
+layout: default
+---
+<main id="archive">
+  <header class="tagbox">
+    <h1>Tags</h1>
+    {% for tag in site.tags %}
+    <a href="#{{ tag[0] }}" class="tag" title="see articles tagged with {{ tag[0] }}" aria-label="see articles tagged with {{ tag[0] }}">
+      {{ tag[0] }}
+    </a>
+    {% endfor %}
+  </header>
+  <section class="tag-posts">
+    <h2>Posts by tags</h2>
+    {% for tag in site.tags %}
+    <div class="anchor" id="{{ tag[0] }}"></div>
+    <h3 class="tag">{{ tag[0] }}</h3>
+
+    <ul class="posts-list">
+      {% for post in tag[1] %}
+        <li>
+          <a href="{{ post.url | relative_url }}" title="click to read the article" aria-label='Read the article "{{ post.title }}"'>
+            {{ post.title | markdownify | smartify | remove: "<p>" | remove: "</p>" }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+    {% endfor %}
+  </section>  
+</main>

@@ -1,0 +1,984 @@
+/*! m-type.css v0.9 | GNU GPL v3.0 | https://gitlab.com/wu-mng/m-type */
+/* changelog */
+/*-----------------------------------------------------------------------------
+  TABLE OF CONTENTS 
+-----------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------
+  0. SETUP 
+-----------------------------------------------------------------------------*/
+
+/* 0.1 sass components............Sass files needed to build this stylesheet */ 
+/* 0.2 variables...............................................Scss variables*/ 
+/* 0.3 testing............................................Classes for testing*/
+ 
+/*-----------------------------------------------------------------------------
+  1. BASE STYLES 
+-----------------------------------------------------------------------------*/
+
+/* 1.1 Structure............<html>, <body>, <header>, <main>, <section>, <article>, <footer> */
+/* 1.2 Navigation...........<nav> */
+/* 1.3 Headings.............<h1><h6> */
+/* 1.4 Text.................<p>,<pre>, <fig>, <code> */
+/* 1.5 Links................<a> */
+/* 1.6 Lists................<dl>, <ol>, <ul> */
+/* 1.7 Forms................<form>, <legend>, <fieldset>, <input>, <button> */
+//* 1.8 Images...............<img>, <figure>, <figcaption> */
+/* 1.9 Tables...............<table>, <thead>, <tbody>, <tfoot>, <tr>, <td> */
+/* 1.10 Media................<audio>, <object>, <video> */
+
+/*-----------------------------------------------------------------------------
+  2. COMPONENT STYLES 
+-----------------------------------------------------------------------------*/
+
+/* Built on base styles, they make use of visual metaphors so it's easier to 
+ * interact with the website. These styles should be written to work for the 
+ * majority of use cases site-wide, and any changes in styling should be 
+ * delegated to a parent container.
+*/
+ 
+/* 2.1................................................................Alerts */
+/* 2.2...............................................................Buttons */
+/* 2.3.............................................................Carousels */
+/* 2.4........................................................Dropdown menus */
+/* 2.5................................................................Modals */
+/* 2.6.........................................................Progress Bars */
+/* 2.7..................................................................Tabs */
+/* 2.8..............................................................Lightbox */
+
+/*-----------------------------------------------------------------------------
+  3. STRUCTURAL STYLES 
+-----------------------------------------------------------------------------*/
+
+/* Styles that contain components and their containers. They are used to create 
+ * the layout of a page, and commonly define dimensions.
+*/
+
+/* 3.1 SITE LAYOUT....................Shared components used by every layout */
+  /* 3.1.1 ......................................................Site Header */
+  /* 3.1.2 .....................................................Site Wrapper */
+  /* 3.1.3 ............................................Post default elements */
+  /* 3.1.4 .......................................................Pagination */ 
+  /* 3.1.5 .............................................................Tags */ 
+
+/* 3.2 INDEX LAYOUT.......................Layout for posts index and archive */
+
+/* 3.3 POST LAYOUT..................................Layout for a single post */
+
+/* 3.4 AUTHOR LAYOUT.............................Layout for an author's page */
+
+/* 3.5 RELATED LAYOUT.............................Layout for suggested posts */
+
+/*-----------------------------------------------------------------------------
+  4. UTILITY STYLES 
+-----------------------------------------------------------------------------*/
+
+/* The most specific styles that should exist. Classes that get applied by 
+ * JavaScript using !important belong here, as any other styles that serve a 
+ * singular purpose. 
+ * 
+ * Think .float-right, .align-center, or .font-small for single rules; 
+ * .hidden, .list-unstyled, .clearfix, for patterns. 
+ * (Sometimes they’re called “helpers,” as in Bootstrap.) 
+*/
+
+/* 4.1...............................................................Spacing */
+/* 4.2............................................................Visibility */
+/* 4.3..............................................................Wrappers */
+/* 4.4................................................................Images */
+/* 4.5...............................................................Various */
+
+/*-----------------------------------------------------------------------------
+  TABLE OF CONTENTS END
+-----------------------------------------------------------------------------*/
+
+/*-----------------------------------------------------------------------------
+  0. SETUP 
+-----------------------------------------------------------------------------*/
+
+/* 0.1 sass components............sass files needed to build this stylesheet */ 
+@import "_normalize";
+@import "_config";
+@import "_functions";
+@import "_mixins";
+@import "_rouge";
+
+/* 0.2 variables...............................................Scss variables*/ 
+$nav-height: 4rem;
+$nav-current-item: 3px solid $primary;
+$nav-next-item: 3px solid $lightgray;
+
+/* 0.3....................................................Classes for testing*/
+// * { border: 1px dotted red;}
+
+// accessibility: keyboard navigation 
+*:focus-visible { 
+  border-bottom: 3px solid $primary !important;
+  outline: none;
+  padding: 3px;
+}
+
+// grid testing
+/*
+body {
+  background: linear-gradient(to bottom, #b2e5ff 1px,transparent 1px);
+  background-size: 100% $grid-points*2+px;
+}
+*/
+
+/*-----------------------------------------------------------------------------
+  1. BASE STYLES 
+-----------------------------------------------------------------------------*/
+
+/* 1.1 Structure............<html>, <body>, <header>, <main>, <section>, <article>, <footer> */
+html { 
+  font-size: px-to-percent($font-size);
+  @if $is-font-tablet { @include tablet { font-size: px-to-percent($font-tablet); } }
+  @if $is-font-laptop { @include laptop { font-size: px-to-percent($font-laptop); } }
+  @if $is-font-desktop { @include desktop { font-size: px-to-percent($font-desktop); } }
+}
+  
+body {
+  background-color: $background-color;
+  color: $text-color;
+  font-family: $font-family;
+  @include typography;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+  margin: 0;
+  // sticky footer
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  margin: auto;
+  margin-top: 3rem;
+  max-width: 100%;
+  @include laptop { max-width: 640px; }
+  @include desktop { margin-left: 0; }
+//  .flex {
+//    flex: 640px 0;
+//    min-width: 0; // prevent flex overflow
+//  }
+}
+
+aside {
+  flex: 100%;
+  margin-top: $nav-height;
+  min-width: 0;
+  background: #e9ece9;
+  padding: 2rem .5rem;
+  border-radius: 6px;
+
+  @include desktop {
+    margin-left: auto;
+    flex: 320px 0;
+  } 
+}
+
+article > * { overflow: hidden; }
+
+footer#main-footer {
+  background: $darkgray;
+  color: $white;
+  padding: 0 1rem;
+  p { 
+    @include typography(0);
+    margin: 1rem 0; 
+  }
+}
+
+
+/* 1.2 Navigation...........<nav> */
+
+/* 1.3 Headings.............<h1><h6> */
+h1, h2, h3, h4, h5, h6 { 
+  font-family: $headings-font-family;
+  font-weight: 500;
+  margin: 0;
+  @include baseline;
+}
+h1 { @include typography(6, 1.2); }    
+h2 { @include typography(5, 1.2); }    
+h3 { @include typography(4, 1.2); }  
+h4 { @include typography(3, 1.2); }    
+h5 { @include typography(2, 1.2); }  
+h6 { @include typography(1, 1.2); }
+
+.small { @include typography(0.5); }
+.smaller { @include typography(0); }
+
+/* 1.4 Text.................<p>,<pre>, <fig>, <code> */
+blockquote, ol, p, ul, li, dt, dd { @include baseline; }
+
+blockquote {
+  border-left: 3px solid $lightgray;
+  color: $darkgray;
+  @include typography(2);
+  font-style: italic;
+  font-weight: 300;
+  margin: 3rem 0;
+  padding-left: 1.5rem;
+}
+
+blockquote blockquote::before { 
+  content: "\2014\00a0";
+}
+blockquote blockquote {
+  border: none;
+  margin-top: 0;
+  text-align: right;
+}
+blockquote blockquote p { display: inline; }
+// cite {}
+
+pre, code { font-family: $mono-font; }
+
+pre { 
+  border-radius: 0.1875rem;
+  padding: 1rem;
+  white-space: break-spaces; 
+}
+
+.highlighter-rouge {
+  @include baseline;
+  background-color: $lightgray;
+  border-radius: 3px;
+  padding: 0 .5rem;
+}
+
+.highlight {
+  background-color: $terminal; 
+}
+
+/* correct a bug introduced by normalize, causing this to overlap the mobile menu */
+sub, sup { 
+  padding-left: .125rem;
+  position: inherit;
+  vertical-align: super; 
+}
+
+/* 1.5 Links................<a> */
+a,
+a:visited,
+a:focus,
+a:hover,
+a:active {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:active, a:hover { color: $primary; }
+
+p a { border-bottom: 1px solid; }
+
+li > a:focus, 
+li > a:hover { 
+  border-bottom: 1px solid;
+}
+
+// reset 'a' styling so image links don't style like text links
+// note that this could cause problems with inline images
+a img { display: block; }
+
+/* 1.6 Lists................<dl>, <ol>, <ul> */
+dt { font-weight: 500; }
+li ul, li ol { margin-top: 1.5rem; }
+
+/* 1.7 Forms................<form>, <legend>, <fieldset>, <input>, <button> */
+[type="checkbox"], [type="radio"] {
+  margin-right: .5rem;
+}
+
+button {
+  background: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+// markdown class for checkboxes
+.task-list { padding: 0; }
+
+/* 1.8 Images...............<img>, <figure>, <figcaption> */
+img::before {
+  color: $darkgray;
+  @include typography(0);
+  @include baseline(1, padding);
+}
+img, figure { max-width: 100%; }
+figure { margin: 0; }
+
+figcaption, figcaption p {
+  color: $darkgray;
+  @include typography(0); 
+  font-style: italic;
+  margin: 0;
+}
+
+figure.align-center figcaption,
+figure.float-center figcaption { margin: auto; }
+
+/* 1.9 Tables...............<table>, <thead>, <tbody>, <tfoot>, <tr>, <td> */
+table { 
+  border-collapse: collapse;
+  border-top: 1px solid;
+  width: 100%;
+  @include baseline;
+}
+thead {
+  border-bottom: 1px solid;
+}
+
+th { 
+  font-weight: 500;
+  padding: 1rem;
+  text-align: left; 
+}
+tr:nth-child(even) { background-color: $lightgray; }
+td { padding: 1rem; }
+
+/* 1.10 Media................<audio>, <object>, <video> */
+
+
+
+/*-----------------------------------------------------------------------------
+  2. COMPONENT STYLES 
+-----------------------------------------------------------------------------*/
+
+/* 2.1................................................................Alerts */
+
+/* 2.2...............................................................Buttons */
+  
+/* 2.2...............................................................Buttons */
+.button-primary {
+  background: $primary;
+  color: $white !important;
+  border-radius: 0.25rem; 
+  display: inline-block;
+  margin: 1rem 0;
+  padding: 0.375rem 0.75rem !important;
+}
+
+a:hover.button-primary  {
+  background: $darkgray !important;
+} 
+
+/* 2.3.............................................................Carousels */
+
+/* 2.4........................................................Dropdown menus */
+
+/* 2.5................................................................Modals */
+
+/* 2.6.........................................................Progress Bars */
+
+/* 2.7..................................................................Tabs */
+
+/* 2.8..............................................................Lightbox */
+#lightbox {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.lightbox-off {
+  opacity: 0;
+  visibility: hidden;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+}
+.lightbox-on {
+  opacity: 1;
+  visibility: visible;
+  transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+}   
+
+.lightbox img { cursor: pointer; }
+
+.lightbox-close {
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  font-size: 5rem;
+  margin: 1rem;
+  text-align: right;
+  position: absolute;
+  top: -2rem;
+  right: 0;
+}
+.lightbox-close:hover {
+  color: rgba(255, 255, 255, 1);
+}
+
+.lightbox-content {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+}
+
+.lightbox-content img {
+  margin: auto;
+  max-height: calc(100vh - 4rem);
+  @include baseline(.5);
+}
+
+.lightbox-content p { 
+  color: $white;
+  @include typography(1);
+  text-align: center;
+}
+
+/*-----------------------------------------------------------------------------
+  3. STRUCTURAL STYLES 
+-----------------------------------------------------------------------------*/
+
+/* 3.1 SITE LAYOUT....................shared components used by every layout */
+/* 3.1.1 ......................................................Site Header */
+#site-header {
+  background-color: $white;
+  border-bottom: 1px solid $lightgray;
+
+  .site-title { 
+    @include typography(2);
+  }
+
+  .wrapper {
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+#site-hero {
+  //background-color: $lightgray;
+  display: flex;
+  margin: auto;
+  margin-top: $nav-height;
+  max-width: map-get($containers, "desktop");
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  width: 100%;
+  
+  .wrapper { 
+    //background-color: $lightgray;
+    margin: auto;
+    margin-top: 4rem;
+    padding: 4rem 1rem;
+    @include tablet {
+      max-width: 640px;  
+    }
+  }
+  
+  .site-title {
+    @include typography(7);
+    @include baseline(-1); 
+  }
+  .site-tagline {
+    color: $darkgray; 
+    @include typography(3);
+    font-weight: 300;
+  }
+  .site-description { 
+    @include typography(2); 
+    font-weight: 300;
+  }
+}
+
+.site-title { font-weight: 600; }
+
+#site-nav {
+  a { 
+    border-bottom: 3px solid $white;
+    display: inline-block;
+    @include typography(1, 1.2);
+    padding: calc(1rem + 3px) .75rem;
+  }
+  a:active { 
+    background: #f2f2f2;
+    border-bottom: $nav-current-item;
+  } 
+  a:hover {
+    background: #f2f2f2;
+    border-bottom: $nav-next-item;
+    color: $primary;  
+    text-decoration: none;
+  }
+  a.current, a.current:visited { 
+    border-bottom: $nav-current-item;
+  }
+  
+  // non-mobile menu
+  .site-menu { 
+    display: none;
+    @include tablet { display: block; } 
+  }
+
+  
+  // mobile menu
+  .hamburger {
+    @include tablet { display: none; }  
+    padding: 1rem 0;
+    /* prevents text selection */
+    -webkit-user-select: none;
+    user-select: none;
+    
+    input {
+      position: absolute;
+      top: 1rem;
+      cursor: pointer;
+      display: block;
+      height: 1.75rem;
+      width: 2rem;
+      opacity: 0;
+      z-index: 2;
+      -webkit-touch-callout: none;  
+    }
+    
+    input:focus-visible ~ span { background: $primary; }
+    
+    /* hamburger 'rows' */
+    span {
+      background: $black;
+      border-radius: 3px;
+      display: block;
+      width: 2rem;
+      height: .25rem;
+      margin-top: .25rem;
+      position: relative;
+      z-index: 1;
+      transform-origin: 4px 0px;
+      transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+                  // background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+                  opacity 0.55s ease;
+    }
+    span:first-child { transform-origin: 0% 0%; }
+    span:nth-last-child(2) {
+      transform-origin: 0% 100%;
+      margin-bottom: .25rem;
+    }
+    /* hamburger transformation into 'X' */
+    input:checked ~ span {
+      opacity: 1;
+      transform: rotate(45deg) translate(5px, -2px);
+    }
+    input:checked ~ span:nth-last-child(3) {
+      opacity: 0;
+      transform: rotate(45deg) translate(0px, -8px);
+    }
+    input:checked ~ span:nth-last-child(2) {
+      transform: rotate(-45deg) translate(0px, 7px);
+    }
+    /* menu slide-in */
+    input:checked ~ .site-menu-mobile { transform: none; }
+  }
+
+  .site-menu-mobile {
+    background: rgba(249, 249, 249, 0.98);
+    list-style-type: none;
+    position: absolute;
+    right: 0;
+    width: 100vw;
+    height: calc(100vh - #{$nav-height});
+    @include baseline(1, padding-top);
+    overflow-y: scroll;
+    /* menu slide-out */
+    transform-origin: 0 0;
+    transform: translate(100%);
+    transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+    
+    a, a.current, a.current:visited { 
+      border-bottom: 1px dotted;
+      display: block;
+      margin: 0 1rem; 
+      @include typography(4);
+    }
+    a.current { font-weight: 600; }
+    a:last-child { border: none; }
+  }      
+} // #site-nav
+
+/* 3.1.2 .....................................................Site Wrapper */
+#site-wrapper {
+  // sticky footer
+  flex: 1;
+  margin-bottom: 8rem;
+  
+  @media screen and (max-width: 280px) { 
+    width: 90%; 
+  }
+}
+
+#site-wrapper.nav-fixed {
+  margin-top: $nav-height;
+}
+
+/* 3.1.3 ..............................................Post default elements */ 
+.post-header { 
+  @include baseline;
+}
+
+.post-title {
+  font-weight: 600;
+  @include baseline(0.5);
+}
+
+.post-title a { color: $black; border-bottom: none; }
+.post-title a:active, 
+.post-title a:hover { 
+  border-bottom: 2px solid $black;
+  padding-bottom: 1px;
+}
+
+.post-tagline { 
+  color: $darkgray; 
+  @include typography(3);
+  margin-top: 0;
+  @include baseline(0.5);
+  font-weight: 300;
+}
+
+.post-meta { @include typography(1, 1.2); }
+
+.post-meta a { 
+border-bottom: 1px solid;
+}
+
+/* 3.1.4 .......................................................Pagination */ 
+.pagination.top { 
+  margin: 1rem 0 4rem; 
+}
+
+.pagination span,
+.pagination a { 
+  display: inline-block; 
+  padding: 0.5rem 1rem; 
+}
+.pagination #current-page {
+  border-bottom: $nav-current-item;
+}
+
+.pagination a:hover {
+  background: #f2f2f2;
+  border-bottom: $nav-next-item;
+}
+
+/* 3.1.5 .............................................................Tags */ 
+.tag::before { content: "#";}
+.tag, 
+.tag:visited { 
+  background: $lightgray;
+  border-radius: 3px;
+  color: $darkgray;
+  display: inline-block;
+  font-weight: normal;
+  @include typography(0.5, 1);
+  margin: 2px 1px;
+  padding: 3px 5px;
+}
+
+.tag:hover,
+.tag:active { 
+  background: $darkgray;
+  color: $lightgray;
+}
+
+
+/* 3.2 INDEX LAYOUT.......................Layout for posts index and archive */
+#index {
+  h1,h2,h3,h4,h5,h6 { 
+    font-weight: normal; 
+  }
+  .post { 
+    border-bottom: 1px dotted $lightgray;
+    margin-bottom: 4rem;
+    padding-bottom: 4rem; 
+  }
+  .post-title { 
+    @include typography(5, 1.2);
+    // @include baseline(-.75);
+    font-weight: 500;
+  }
+  .post-tagline { 
+    @include typography(2);
+    @include baseline(0.25);
+  }
+   .post-meta { 
+    @include typography(0);
+  }
+  .post-image {
+    float: left;
+    margin: .5rem 1rem 0 0;
+    img { padding-top: 1rem; }
+    figcaption { display: none; } 
+  }
+  
+  .tag, 
+  .tag:visited { 
+    margin: 2px 0;
+    @include typography(0, 1);
+  }  
+}
+
+#archive {
+  .tagbox { @include baseline; }
+  .tag-posts {
+    .tag { 
+      @include typography(1);
+      padding: 3px 10px;
+    }
+    .tag:hover {
+      background: $lightgray;
+      color: $darkgray;
+    }
+    a { border: none; }
+  }
+}
+
+
+/* 3.3 POST LAYOUT..................................Layout for a single post */
+#post {
+  .post-meta { 
+    display: flex;
+    align-items: center;
+    @include typography(1, 1.2);
+  }
+}
+
+.avatar { 
+  line-height: 0;
+  margin-right: .5rem !important; 
+}
+
+.avatar > img {    
+  background-color: #f2f2f2;
+  width: 4rem;
+  height: 4rem;
+//  border: transparent;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.avatar > figcaption { display: none; }
+
+/* 3.4 AUTHOR LAYOUT.............................Layout for an author's page */
+#author {
+  .post-title { display: none; }
+  .post-meta { 
+    display: flex;
+    align-items: center;
+    @include typography(1, 1.2);
+    span {
+      font-style: normal;
+      font-weight: 600;
+      @include typography(4, 1.2);
+    }
+  }
+}
+
+/* 3.5 RELATED LAYOUT.............................Layout for suggested posts */
+#related-posts {
+  text-align: center;
+  font-weight: 300; 
+  justify-content: center;
+  @include laptop { 
+    justify-content: space-between; 
+    text-align: left;
+  }
+
+  .related-header {
+    padding: 0 .5rem;
+  }
+  
+  header { 
+    flex: 100%;
+  }
+  
+  h1 {
+    @include typography(2);
+    margin-bottom: 0;
+    font-weight: 300;
+  }
+  
+  figure { 
+    margin-bottom: .5rem;
+    margin-right: 0;
+  }
+  img { float: none; }
+  
+  .post { 
+    margin: 2rem .5rem auto;
+    min-width: 0;
+    max-width: 320px;
+    @include laptop { max-width: calc(320px - 1.5rem); }
+    @include desktop { max-width: 320px; }
+  }
+  .post-header {
+    margin-bottom: 0;
+  }
+  .post-title {
+    @include typography(1);
+    font-weight: 500;
+    margin-bottom: 0;
+    min-height: 30px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  .post-image { 
+    margin-top: 0;
+    figcaption { display: none; }
+  }
+  
+  .post-footer { text-align: left; }
+  
+  .tag, 
+  .tag:visited { 
+    margin: 2px 0;
+    @include typography(0, 1);
+  }
+  .tag:focus,
+  .tag:hover,
+  .tag:active {
+    background: $lightgray;
+    color: $darkgray;  
+  }
+
+}
+
+/*-----------------------------------------------------------------------------
+  4. UTILITY STYLES 
+-----------------------------------------------------------------------------*/
+/* 4.1...............................................................Spacing */
+.align-left { 
+  float: left;
+  margin-right: 1rem;
+}
+.align-center {
+  display: block;
+  margin: auto; 
+}
+.align-right { 
+  float: right;
+  margin-left: 1rem; 
+}
+
+.anchor {
+  position: relative; 
+  top: -6rem;
+}
+
+.clear { clear: both; }
+
+.fixed {
+  position: fixed; 
+  top:0; 
+  width: 100%;
+}
+
+/* 4.2............................................................Visibility */
+.hidden { display: none; }
+
+.visible-hidden {
+    clip: rect(1px, 1px, 1px, 1px);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+}
+
+.visible-hidden:focus {
+    clip: auto;
+    height: auto;
+    overflow: auto;
+    position: absolute;
+    width: auto;
+}
+
+/* 4.3..............................................................Wrappers */
+.wrapper {
+  margin: auto;
+  max-width: 100%;
+  padding: 0 1rem;
+  @include containers; 
+}
+
+.flex { 
+  display: flex;
+}
+.flex-wrap {
+  display: flex;
+  flex-wrap: wrap;  
+}
+
+/* 4.4................................................................Images */
+.img-thumb { 
+  margin: .5rem;
+  margin-right: 1.5rem; 
+}
+
+.img-thumb > figcaption p { 
+  @include typography(0);
+}
+
+.img-thumb, .img-small { 
+  float: left;
+  text-align: left; 
+}
+
+.img-thumb.center {
+  margin: auto;
+  float: none;
+}
+
+.img-thumb.right,
+.img-small.right { 
+  float: right;
+  margin-left: 1.5rem;
+  text-align: right;
+}
+
+@include phablet {
+  .img-small { 
+    margin: .5rem 1.5rem .5rem 0;
+  }
+  .img-thumb.right,
+  .img-small.right { 
+    margin-left: 1.5rem;
+  }  
+}
+
+@include tablet {
+  .img-small.center { 
+    margin: auto;
+    float: none;
+    text-align: center; 
+  }
+  .img-medium { @include baseline; }
+}
+
+/* 4.5...............................................................Various */
+.posts-list {
+  padding: 0;
+  > li {
+    @include typography(2); 
+    list-style-type: none;
+  }
+}
+
+.read-more { 
+  clear: both;
+  @include typography(2);
+  @include baseline;
+  a {
+    border-bottom: 2px solid;
+  }
+  :after { content: "..."; }
+}

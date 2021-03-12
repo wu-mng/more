@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="{{ site.locale | slice: 0,2 }}">
+{%- include head.html -%}
+<body>
+  {% include header.html %}
+  <div id="site-wrapper" class="wrapper flex-wrap {% if site.data.navigation.fixed %} nav-fixed {% endif %}">
+    {{ content }}
+    {% include lightbox.html %}
+  </div>
+  <footer id="main-footer">
+    <div class="wrapper flex-wrap">
+      <p>&#127279; {{ site.author }} {{ site.time | date: "%Y" }}</p>
+    </div>
+  </footer>
+</body>
+</html>

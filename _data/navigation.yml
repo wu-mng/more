@@ -1,0 +1,15 @@
+items:
+  - name: Home
+    link: /
+  - name: "Edge Cases"
+    link: /category/edge-cases
+  - name: "Layout"
+    link: /category/layout
+  - name: "Markup"
+    link: /category/markup
+  - name: "Post Formats"
+    link: /category/post-formats  
+  - name: About
+    link: /README
+fixed: true
+hamburger: true

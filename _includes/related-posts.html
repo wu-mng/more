@@ -1,0 +1,64 @@
+<section id="related-posts" class="flex-wrap">
+{% assign showRelatedPosts = include.posts %}
+{% capture posts %} 
+  {% for post in site.posts %}
+    {% if post.url != page.url %}
+      {% assign matchingTags = "" | split: ","  %}
+        {% for tag in post.tags %}
+          {% assign currentPostTag = tag | downcase %}
+          {% assign tagsPage = page.tags | downcase %}
+          {% if tagsPage contains currentPostTag %}
+              {% assign matchingTags = matchingTags | push: currentPostTag %}    
+          {% endif %}
+        {% endfor %}
+        
+        {% assign tagsTotal = matchingTags.size %}
+
+        {% if tagsTotal < 10 %}<!-- -->
+          {% assign tagsTotal = tagsTotal | prepend: "0" %}
+        {% else %}
+          {% assign tagsTotal = tagsTotal  %}
+        {% endif %}
+        
+        | {% comment %} don't remove this! {% endcomment %}
+        <article class="post">
+          <!-- {{ tagsTotal }} -->
+          <header class="post-header">
+            <h2 class="post-title">
+              <a href="{{ post.url | relative_url }}" title="click to read the article {{ post.title }}" aria-label='Read the article "{{ post.title }}"'>
+              {{ post.title | markdownify | smartify | remove: "<p>" | remove: "</p>" }}
+              </a>
+            </h2>
+          </header>
+          <section class="post-image">
+          <a href="{{ post.url | relative_url }}" role="presentation" aria-hidden="true" tabindex="-1">
+          {% if post.image != site.defaults[0].values.image %}
+            {% capture featured_image %} {{ post.image }} {% endcapture %}
+            {% capture featured_alt %} {{ post.alt }} {% endcapture %}
+            {% include image.html src=featured_image alt=featured_alt size="small" %}
+          {% else %}
+            {% include image.html src=default_image size="small" %}
+          {% endif %}
+          </a>
+          </section>
+          <footer class="post-footer">
+            {% for tag in matchingTags %}
+            <p class="tag">{{ tag }}</p>
+            {% endfor %}
+          </footer>
+        </article>
+            
+    {% endif %}
+  {% endfor %}
+{% endcapture %}
+
+{% assign relatedPosts = posts | split: '|' | sort | reverse %}
+
+<header class="related-header">
+  <h1>You might also like:</h1>
+  <hr>
+</header>
+{% for i in (1..showRelatedPosts) %}
+  {{ relatedPosts[i] }}
+{% endfor %}
+</section>

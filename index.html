@@ -1,0 +1,28 @@
+---
+layout: default
+---
+<main id="index" {% if site.sidebar %}class="flex"{% endif %}>
+{% if page.url != "/" %}
+  {% include pagination.html position="top" %}
+{% endif %}
+  
+{%- for post in site.posts -%}
+  {%- if post.sticky == true and paginator.page == 1 -%}
+    {%- assign sticky_post = post -%}
+    {% include index-post.html %}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- for post in paginator.posts -%}
+  {%- unless post.sticky == true -%}
+    {% include index-post.html %}
+  {%- endunless -%}
+{%- endfor -%}
+
+{% include pagination.html %}
+</main>
+
+{% if site.sidebar %}
+<aside>
+</aside>
+{% endif %}

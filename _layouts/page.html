@@ -1,0 +1,13 @@
+---
+layout: default
+---
+<main>
+  <article>
+    <header>
+      <h1>{{ page.title | markdownify | smartify | remove: "<p>" | remove: "</p>" }}</h1>
+    </header>
+    <section>
+        {{ content | normalize_whitespace }}
+    </section>
+  </article>
+</main>

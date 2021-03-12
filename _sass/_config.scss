@@ -1,0 +1,86 @@
+// LAYOUT //
+
+// starting at each screen *px size...
+$brekapoints:                (phablet: 536px, tablet: 768px, laptop: 992px, desktop: 1440px);
+// ...the content is *px large
+$containers:  (mobile: 320px, phablet: 480px, tablet: 640px, laptop: 960px, desktop: 1140px);
+
+// SCALE //
+
+// The most common scale ratios:
+$golden-ratio:      1.618; 
+$perfect-fifth:     1.5;
+$augumented-fourth: 1.414; 
+$perfect-fourth:    1.333; 
+$major-third:       1.25;  
+$minor-third:       1.2;   
+$major-second:      1.125; 
+$minor-second:      1.067;
+
+// Choose your scale(s) here
+$scale: 1.2;
+
+// Optional extra scales at different screen sizes (see $breakpoints)
+$scales: (tablet: 1.25);
+
+// if this is set to true, the interval between scale sizes will be smaller, 
+// resulting in smaller headings text sizes
+$stranded: false;
+
+// TYPOGRAPHY //
+
+// set the root-font size
+// If the size is 16px, and the grid is 8-point, you can use .5rem increments 
+// (on both sides...) to build the layouts. Set up variables for calculations 
+// otherwise.
+$font-size: 16px;
+
+// Optional extra font sizes at different screen widths (see $breakpoints)
+$font-sizes: (laptop: 18px);
+
+// set the approximate distance between lines (a.k.a 'leading') 
+// (the actual line-height will be a multiple of $grid-points)
+$line-spacing: 1.5;
+
+// baseline grid row height, in points
+$grid-points: 8;
+
+$text-color: #212121;
+$background-color: #f9f9f9;
+$terminal: #1c1c1c;
+
+$font-family: -apple-system, 
+            BlinkMacSystemFont, // Chrome on Mac OS X 
+            "Segoe UI", // Windows
+            Roboto, // Android
+            Oxygen, Ubuntu, Cantarell, // Linux
+            "Fira Sans", // Firefox OS
+            "Droid Sans", // Old Android
+            "Helvetica Neue", Arial, sans-serif;  
+
+$mono-font: SFMono-Regular, Menlo, Monaco, // Mac
+            Consolas, // Windows
+            "Andale Mono", // Old Windows
+            "Ubuntu Mono", "Liberation Mono", // Linux
+            "Courier New", monospace;
+
+$headings-font-family: inherit;
+
+// COLORS //
+
+$base-color: #007500;
+$accent-color: #0c6b6b;
+$lightgray: #e9ece9;
+$darkgray: #515951;
+$black: $text-color;
+$white: $background-color;
+
+// colors aliases 
+$base: $base-color;
+$primary: $base-color;
+$primary-color: $base-color;
+$accent: $accent-color;
+$secondary: $accent-color;
+$secondary-color: $accent-color;
+$light-gray: $lightgray;
+$dark-gray: $darkgray;

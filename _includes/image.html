@@ -1,0 +1,79 @@
+{% capture default_image %} 
+  {{ site.defaults[0].values.image.path }} 
+{% endcapture %}
+
+{% capture featured_image %} 
+  {{ page.image }} 
+{% endcapture %}
+
+{% capture featured_alt %} 
+  {{ page.alt }} 
+{% endcapture %}
+
+{% capture featured_caption %} 
+  {{ page.caption }} 
+{% endcapture %}
+
+{% capture width %}
+  {% case include.size %}
+    {% when "thumb" %}
+      {{ site.data.responsives.settings.srcset[0] }}
+    {% when "small" %}
+      {{ site.data.responsives.settings.srcset[1] }}
+    {% when "medium" %}
+      {{ site.data.responsives.settings.srcset[3] }}      
+  {% endcase %}
+{% endcapture %}
+
+{% capture srcset %}
+  {% capture sizes %}
+    {%- for size in site.data.responsives.settings.srcset -%}
+      {{ site.paths.images | relative_url }}/{{ size | strip }}/{{ include.src | remove: 'assets/img/' | strip }} {{ size | strip }}w,
+    {%- endfor -%}
+  {% endcapture %}
+  {{ sizes | split: ',' | join: ', ' }}
+{% endcapture %}
+
+{% capture sizes %}
+  {% case include.size %}
+  {% when "thumb" %}
+    {{ site.data.responsives.settings.thumb | strip }}
+  {% when "small" %}
+    {{ site.data.responsives.settings.small | strip }}
+  {% when "medium" %}
+    {{ site.data.responsives.settings.medium | strip }}    
+  {% endcase %}
+{% endcapture %}
+
+{% capture alt %}
+  {% if include.alt %}
+    {{ include.alt | strip_html | escape  }}
+  {% elsif include.caption %}
+    {{ include.caption | markdownify | strip_html | escape }}
+  {% endif %}
+{% endcapture %}
+
+{% capture accessibility %}
+  {% if include.src == default_image or include.src == author_image %} 
+    role="presentation" aria-hidden="true"
+  {% else %} 
+    aria-labelledby="{{ include.src | strip }}"
+  {% endif %}
+{% endcapture %}
+
+
+<figure class="img-{{ include.size | strip }} {{ include.class | strip }}" style="max-width:{{ width | strip }}px" {{ accessibility | strip }}>
+  <img  srcset="{{ srcset | strip }}"
+        sizes="{{ sizes | strip }}"
+        src="{{ site.paths.images | relative_url }}/{{ width | strip }}/{{ include.src | remove: 'assets/img/' | strip }}" 
+        alt="{{ alt | strip }}"
+        width="{{ width | strip }}px"
+        loading="lazy">
+  <figcaption id="{{ include.src | strip }}">
+    <p>{{ include.caption | markdownify | strip_html | escape }}</p>
+  </figcaption>
+</figure>  
+
+{% comment %} 
+usage: {% include image.html src="filename.jpg" size="medium" alt="" caption="" %}
+{% endcomment %}

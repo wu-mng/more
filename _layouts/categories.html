@@ -1,0 +1,10 @@
+---
+layout: page
+---
+{% if page.value %}
+  {% include archive.html key='categories' value=page.value %}
+{% else %}
+  {% include archive.html key='categories' value=page.title %}
+{% endif %}
+
+

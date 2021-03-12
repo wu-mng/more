@@ -1,0 +1,58 @@
+<article class="post{% if post.sticky %} sticky {%- endif -%}">
+  <header class="post-header">
+    <h1 class="post-title">
+      <a href="{{ post.url | relative_url }}" title="read the article" aria-label='Read the article "{{ post.title }}"'>
+        {{ post.title | markdownify | smartify | remove: "<p>" | remove: "</p>" }}
+      </a>
+    </h1>
+    {% if post.tagline %}
+      <p class="post-tagline">{{ post.tagline | markdownify | smartify | remove: "<p>" | remove: "</p>" }}</p>
+    {% endif %}
+    <div class="post-meta">
+      {% include author.html %}
+      {{ author_name }} •
+      <time class="index-time" datetime="{{ post.date | date_to_xml_schema }}">
+        {{ post.date | date_to_long_string }}
+      </time>
+    </div>
+  </header>
+  <section class="post-article">
+  {% if site.article_images == true and post.image != site.defaults[0].values.image %}
+    {% capture featured_image %} {{ post.image }} {% endcapture %}
+    {% capture featured_alt %} {{ post.alt }} {% endcapture %}
+    {% capture featured_caption %} {{ post.caption }} {% endcapture %}
+    {% include image.html size="thumb" class="post-image" src=featured_image alt=featured_alt caption=featured_caption %}
+  {% endif %}
+  
+  {% capture word_count_full_post %} {{ post.content | number_of_words }} {% endcapture %}
+  
+  {% if post.excerpt.size > 0 %}
+    {{ post.excerpt | markdownify }}
+    {% capture word_count %} {{ post.excerpt | number_of_words }} {% endcapture %}
+  {% elsif post.content contains "<!--more-->" %}
+    {{ post.content | split: "<!--more-->" | first | markdownify }}
+    {% capture word_count %} {{ post.content | split:'<!--more-->' | first | number_of_words }} {% endcapture %}
+  {% else %}
+    {{ post.content | markdownify }}
+    {% capture word_count %} {{ post.content | number_of_words }} {% endcapture %}
+  {% endif %}
+  </section>
+  
+  {% unless word_count == word_count_full_post %}
+    <button class="read-more">
+      <a href="{{ post.url | relative_url }}/#more" title='about "{{ post.title }}"' aria-label='Read more about "{{ post.title }}"'>
+        Read More
+      </a>
+    </button> 
+  {% endunless %}
+  
+  <footer class="post-footer">
+  {% if post.tags.size != 0  %}  
+    {% for tag in post.tags %}
+      <a href="{{ '/tags.html/#' | relative_url }}{{ tag }}" class="tag" title="see other articles tagged with #{{ tag }}" aria-label="see other articles tagged with #{{ tag }}">
+        {{ tag | strip | split: "," }}
+      </a>
+    {% endfor %}
+  {% endif %}
+  </footer>  
+</article>
