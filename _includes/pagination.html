@@ -1,0 +1,19 @@
+{% if paginator.total_pages > 1 %}
+  <nav class="pagination container {% if include.position == "top" %}top{% endif %}" aria-label="Pagination">
+    {% if paginator.previous_page %}
+    <a href="{{ paginator.previous_page_path | relative_url }}" aria-label="Go to previous page">«</a>
+    {% endif %}
+    {% for page in (1..paginator.total_pages) %}
+      {% if page == paginator.page %}
+      <span id="current-page">{{ page }}</span>
+      {% elsif page == 1 %}
+      <a href="/" aria-label="Go to page {{ page }}">{{ page }}</a>  
+      {% else %}
+      <a href="/{{ page }}" aria-label="Go to page {{ page }}">{{ page }}</a>  
+      {% endif %}
+    {% endfor %}
+    {% if paginator.next_page %}
+    <a href="{{ paginator.next_page_path | relative_url }}" aria-label="Go to next page">»</a>
+    {% endif %}
+  </nav>
+{% endif %}

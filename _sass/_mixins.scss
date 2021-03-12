@@ -1,0 +1,165 @@
+// setting a few variables, in a vain attempt to avoid madness
+$is-font-phablet: map-has-key($font-sizes, "phablet");
+$is-font-tablet: map-has-key($font-sizes, "tablet");
+$is-font-laptop: map-has-key($font-sizes, "laptop");
+$is-font-desktop: map-has-key($font-sizes, "desktop");
+
+$font-phablet: map-get($font-sizes, "phablet");
+$font-tablet: map-get($font-sizes, "tablet");
+$font-laptop: map-get($font-sizes, "laptop");
+$font-desktop: map-get($font-sizes, "desktop");
+
+$is-scale-phablet: map-has-key($scales, "phablet");
+$is-scale-tablet: map-has-key($scales, "tablet");
+$is-scale-laptop: map-has-key($scales, "laptop");
+$is-scale-desktop: map-has-key($scales, "desktop");
+
+$scale-phablet: map-get($scales, "phablet");
+$scale-tablet: map-get($scales, "tablet");
+$scale-laptop: map-get($scales, "laptop");
+$scale-desktop: map-get($scales, "desktop");
+
+// this is used to set the body text, which depends on the root-font
+@mixin base-typography($property:line-height, $multiplier:1) {  
+  @if $property == line-height {
+    font-size: px-to-rem($font-size);    
+  }
+  
+  #{$property}: px-to-rem(calc-line-height($font-size))  * $multiplier;
+
+  @if $is-font-phablet { 
+    @include phablet {
+      #{$property}: (px-to-rem(calc-line-height($font-phablet), $font-phablet)) * $multiplier;
+    } 
+  }
+
+  @if $is-font-tablet { 
+    @include tablet {
+      #{$property}: px-to-rem(calc-line-height($font-tablet), $font-tablet)  * $multiplier;
+    } 
+  }
+  
+  @if $is-font-laptop { 
+    @include laptop {
+      #{$property}: px-to-rem(calc-line-height($font-laptop), $font-laptop)  * $multiplier;
+    } 
+  }
+  
+  @if $is-font-desktop { 
+    @include desktop {
+      #{$property}: px-to-rem(calc-line-height($font-desktop), $font-desktop)  * $multiplier;
+    } 
+  }  
+}  
+
+@mixin baseline($size:1, $property:margin-bottom) {
+  @include base-typography($property, $size);
+}
+
+@mixin typography($value: $font-size, $multiplier: $line-spacing) {
+
+  @if $value == $font-size {
+    @include base-typography;
+  } @else {
+  
+// this is used to set any kind of text other than body (e.g. headings)
+    font-size: px-to-rem(scale($value));
+    line-height: px-to-rem(calc-line-height(scale($value), $multiplier));
+
+    @if $is-scale-phablet {     
+      @include phablet {
+        font-size: px-to-rem(scale($value, $scale-phablet));
+        @if $is-font-phablet {
+          line-height: px-to-rem(calc-line-height(scale($value, $scale-phablet, $font-phablet), $multiplier), $font-phablet);
+        } @else {
+          line-height: px-to-rem(calc-line-height(scale($value, $scale-phablet), $multiplier));
+        }
+      } 
+    }
+
+    @if $is-scale-tablet {     
+      @include tablet {
+        font-size: px-to-rem(scale($value, $scale-tablet));
+        @if $is-font-tablet {
+          line-height: px-to-rem(calc-line-height(scale($value, $scale-tablet, $font-tablet), $multiplier), $font-tablet);
+        } @else {
+          line-height: px-to-rem(calc-line-height(scale($value, $scale-tablet), $multiplier));
+        }
+      } 
+    }
+    
+    @if $is-scale-laptop { 
+      @include laptop {
+        font-size: px-to-rem(scale($value, $scale-laptop));       
+        @if $is-font-laptop {
+          line-height: px-to-rem(calc-line-height(scale($value, $scale-laptop, $font-laptop), $multiplier), $font-laptop);          
+        } @else {
+          line-height: px-to-rem(calc-line-height(scale($value, $scale-laptop), $multiplier));
+        }
+      } 
+    }
+    
+    @if $is-scale-desktop { 
+      @include desktop {
+        font-size: px-to-rem(scale($value, $scale-desktop));       
+        @if $is-font-desktop {
+          line-height: px-to-rem(calc-line-height(scale($value, $scale-desktop, $font-desktop), $multiplier), $font-desktop);
+        } @else {
+          line-height: px-to-rem(calc-line-height(scale($value, $scale-desktop), $multiplier));
+        }
+      } 
+    }
+  }
+}
+
+@mixin phablet {
+  @if (map-has-key($brekapoints, "phablet")) { 
+    @media screen and (min-width: map-get($brekapoints, "phablet")) {
+      @content;
+    }
+  }
+}
+
+@mixin tablet {
+  @if (map-has-key($brekapoints, "tablet")) { 
+    @media screen and (min-width: map-get($brekapoints, "tablet")) {
+      @content;
+    }
+  }
+}
+
+@mixin laptop {
+  @if (map-has-key($brekapoints, "laptop")) { 
+    @media screen and (min-width: map-get($brekapoints, "laptop")) {
+      @content;
+    }
+  }
+}
+
+@mixin desktop {
+  @if (map-has-key($brekapoints, "desktop")) { 
+    @media screen and (min-width: map-get($brekapoints, "desktop")) {
+      @content;
+    }
+  }
+}
+
+@mixin containers {
+  max-width: map-get($containers, "mobile");
+
+  @if (map-has-key($containers, "phablet")) { 
+    @include phablet { max-width: map-get($containers, "phablet"); }
+  }
+  
+  @if (map-has-key($containers, "tablet")) { 
+    @include tablet { max-width: map-get($containers, "tablet"); }
+  }
+
+  @if (map-has-key($containers, "laptop")) { 
+    @include laptop { max-width: map-get($containers, "laptop"); }
+  }
+
+  @if (map-has-key($containers, "desktop")) { 
+    @include desktop { max-width: map-get($containers, "desktop"); }
+  }
+}

@@ -1,0 +1,35 @@
+---
+layout: default
+---
+{% assign author = page %}
+<main>
+  <article id="author">
+    <header class="post-header">
+      <h1 class="post-title">{{ author.name }}</h1>
+      <section class="post-meta">
+        {% if author.image %}
+          {% capture author_image %} 
+            {{ author.image }}
+          {% endcapture %}
+          {% include image.html src=author_image size="thumb" class="avatar" %}
+        {% else %}
+          <p class="avatar"></p>
+        {% endif %}
+        <address>
+          <span>{{ author.name }}</span><br>
+            {{ author.role }}<br>
+            <a href="{% if author.contact contains "@" %}mailto:{% endif %}{{ author.contact }}" target="_blank" rel="author noopener" title="contact the author" aria-label="Contact {{ author.display_name }}">
+            {{ author.contact }}
+            </a>
+        </address>
+      </section>
+    </header>
+    <section>
+      {{ content }}
+    </section>
+    <section class="author-posts">
+      <h2>Posts by {{ author.name }}</h2>
+        {% include archive.html key='author' value=author.name %}
+    </section>
+  </article>
+</main>

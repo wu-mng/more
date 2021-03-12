@@ -1,0 +1,70 @@
+// remove units (px,em,rem...) from numbers
+@function strip($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+    @return $number / ($number * 0 + 1);
+  }
+  @return $number;
+}
+
+// round decimals (limit the amount of numbers after the comma)
+@function round($x, $decimals:3) {
+  $n: 1; 
+  @for $i from 1 through $decimals { 
+    $n: $n * 10; 
+  } 
+  @return ceil($x * $n) / $n; 
+}
+
+@function px-to-percent($x) { 
+  @return ($x / 16px) * 100%; 
+}
+
+@function px-to-rem($x, $y:$font-size) { 
+  @return round($x / $y)+0rem; 
+}
+
+@function calc-line-height($x, $y:$line-spacing) {
+  $line-height: ($x * $y);
+  $line-height: ceil($line-height);
+  @while ($line-height % $grid-points) != 0px {
+    $line-height: $line-height + 1;
+  }
+  @return $line-height;
+}
+
+// modular type scale 
+@function scale($value, $scale-ratio:$scale, $base-size:$font-size) {
+  $sizes: 12;
+  $alternate-size: $base-size - 2px;
+  
+  @while ($base-size/$scale-ratio) > $alternate-size {
+    $alternate-size: round($alternate-size*$scale-ratio);
+    $alternate-size: $alternate-size;                 
+  }
+
+   $scale-map: (0: round($base-size/$scale-ratio), 0.5: $alternate-size,  1: $base-size);
+
+  @if $stranded {
+    @for $i from 2 through $sizes {
+      @if $i % 2 == 0 {
+        $size: round($alternate-size * $scale-ratio);
+        $alternate-size: $size;
+        $next-scale-map: ($i: $size);
+        $scale-map: map-merge($scale-map, $next-scale-map);      
+      } @else {
+        $size: round($base-size * $scale-ratio);
+        $base-size: $size;
+        $next-scale-map: ($i: $size);
+        $scale-map: map-merge($scale-map, $next-scale-map);        
+      }
+    }
+  } @else {
+    @for $i from 2 through $sizes {
+        $size: round($base-size * $scale-ratio);
+        $base-size: $size;
+        $next-scale-map: ($i: $size);
+        $scale-map: map-merge($scale-map, $next-scale-map);      
+    }    
+  }
+  @return map-get($scale-map, $value);
+}

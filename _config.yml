@@ -1,0 +1,162 @@
+##############
+# More v1.0  #
+##############
+
+# ------------------------
+# 1. Site Setup [REQUIRED]
+# ------------------------
+# Be sure to fill the fields below (unless they're markes as [OPTIONAL]),  
+# even if you don't plan to use them as visual elements (e.g. title in home page), 
+# since they are much necessary for SEO purposes
+
+locale: en_US # Language of the site, the format is language_TERRITORY
+url: http://127.0.0.1:4000 # URL of the site. Needed to generate absolute links like RSS feed, OG images
+permalink: /:categories/:title # [OPTIONAL] post URL: "https://example.com/post-category/post-title"
+
+title: More # name of the website. Used for branding, like in navbar and home page.
+tagline: minimalist Jekyll theme # [OPTIONAL] just below the title in home
+# description, just below the tagline in home page
+description: "**More** is a minimalist theme for Jekyll, the static site generator. It provides a solid base to build a responsive, accessible, SEO-optimized website. Right now is mostly suited for blogs, but you know, we have plans."
+
+author: wu-mng  # This is the default author of the articles. Also shows in the footer.
+author_image: "og.png" # [OPTIONAL] Picture of the author. The default site image is used otherwise (see below)
+email: wu-mng@example.com # [OPTIONAL] Default contact of the author.
+
+# ------------------------------
+# 2. Home Page Layout [OPTIONAL]
+# ------------------------------
+
+header: true # Show the site title, tagline and description in home page
+# header-image: false # work-in-progress, this option is not available yet
+# sidebar: false # work-in-progress, this option is not available yet
+article_images: true # Show the featured images of articles in home page.
+excerpt_separator: <!--more--> # If you insert this tag in your posts, the content before <!--more--> will appear on home page as excerpt 
+paginate: 5 # Number of articles to show on home page before a pagination menu appears
+paginate_path: /:num # Pagination url. Currently: www.example.com/2
+
+# ----------------------------
+# 3. Default values [OPTIONAL]
+# ----------------------------
+# There's usually no need to modify these values,
+# but you probably want to set your own "logo:" and "image:" values
+
+defaults:
+  - 
+    scope:
+      path: ""
+    values:
+      layout: default
+      excerpt: "" # leave this empty, use the 'description' variable instead
+      logo: "assets/ico/512.png" # site logo
+      image:
+        path: "assets/img/more_open_graph_default_image.png" # default featured image
+        height: 630
+        width: 1200
+  - 
+    scope:
+      path: ""
+      type: pages
+    values:
+      layout: page
+  - 
+    scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+      sidebar: true
+  - 
+    scope:
+      path: ""
+      type: authors
+    values:
+      layout: author
+  - 
+    scope:
+      path: ""
+      type: categories
+    values:
+      layout: categories
+      key: 'categories'
+
+# ---------------------------------------
+# 4. Jekyll Configuration [VERY OPTIONAL] 
+# ---------------------------------------
+# Don't touch this, unless you know what you're doing.
+
+paths:
+  images: /assets/img
+  icons: /assets/ico
+  stylesheets: /assets/css
+  scripts: /assets/js
+
+collections:
+  authors:
+    output: true
+  categories:
+    output: true
+    permalink: /category/:path/
+
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-paginate
+
+titles_from_headings: # https://github.com/benbalter/jekyll-titles-from-headings
+  enabled:  false
+
+exclude:
+  - npm
+  - docker-compose.yml
+  - vendor
+
+# -----------------------
+# x. Social Media [TO DO] 
+# -----------------------
+
+# Specify social profiles
+# these will probably appear on the site footer.
+# For an explanation about the use of these profiles for SEO purposes see: 
+# https://developers.google.com/search/docs/guides/enhance-site#add-your-sites-name-logo-and-social-links
+
+#~ social:
+  #~ name: username # User, organization or site name
+  #~ links:
+    #~ - https://twitter.com/author
+    #~ - https://www.facebook.com/author
+    #~ - https://www.linkedin.com/in/author
+    #~ - https://github.com/author  
+
+# --------------
+# x. SEO [TO DO]
+# --------------
+
+# see: https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md for more infos.
+
+# Actually the "x. Social Media" section and the "logo" option are very much 
+# related to these options, but since we're gonna use them for other purposes 
+# as well it might be worth to keep them separated. 
+# This also make the configuration simpler for the user. 
+
+#~ twitter:
+  #~ username: author # The site's Twitter handle
+  #~ card: summary # The site's default card type
+
+#~ facebook:
+  #~ app_id: 1234 # Facebook app ID for Facebook insights
+  #~ publisher: 1234 # Facebook page URL or ID of the publishing entity
+  #~ admins: 1234 # Facebook user ID for domain insights linked to a personal account
+
+#~ # For verifying ownership, e.g. via Google Search Console
+
+# google_site_verification: 1234
+
+# or, alternatively:
+
+#~ webmaster_verifications:
+  #~ google: 1234
+  #~ bing: 1234
+  #~ alexa: 1234
+  #~ yandex: 1234
+  #~ baidu: 1234

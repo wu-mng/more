@@ -1,0 +1,47 @@
+{% for author in site.authors %}
+  {% if author.name == page.author %}
+    {% assign listed_author = author %}
+  {% endif %}
+{% endfor %}
+
+{% if listed_author %}
+  {% assign author_name = listed_author.name %}
+  {% assign author_url = listed_author.url %}
+  {% assign author_contact = listed_author.contact %}
+  {% assign author_image = listed_author.image %}    
+{% else %}
+
+  {% if page.author %}
+    {% assign author_name = page.author %}
+    {% assign author_url = page.contact %}
+    {% assign author_contact = page.contact %}
+    {% assign author_image = site.defaults[0].values.image.path %}
+  
+  {% elsif post.author %}
+    {% assign author_name = post.author %}
+    {% assign author_url = post.contact %} 
+
+  {% else %}
+    {% assign author_name = site.author %}
+    {% assign author_url = site.email %}
+    {% assign author_contact = site.email %}
+    {% if site.author_image %}
+      {% assign author_image = site.author_image %}
+    {% else %}
+      {% assign author_image = site.defaults[0].values.image.path %}
+    {% endif %}
+  {% endif %}
+
+{% endif %}
+
+{% capture author_href %}
+  {% if listed_author %}
+    <a href="{% if author_url contains "@" %}mailto:{% endif %}{{ author_url | relative_url }}" rel="author" title="contact the author" aria-label="Contact {{ author_name }}, author of the article">
+      {{ author_name }}
+    </a>
+  {% else %}
+    <a href="{% if author_url contains "@" %}mailto:{% endif %}{{ author_url }}" target="_blank" rel="author noopener" title="contact the author" aria-label="Contact {{ author_name }}, author of the article">
+      {{ author_name }}
+    </a>
+  {% endif %}
+{% endcapture %}

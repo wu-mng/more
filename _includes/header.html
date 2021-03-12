@@ -1,0 +1,40 @@
+<header id="site-header" {% if site.data.navigation.fixed %} class="fixed" {% endif %}>
+  <div class="wrapper flex-wrap">
+    <a href="/" class="site-title" aria-label="home page">{{ site.title }}</a>
+    <nav id="site-nav">
+      {% if site.data.navigation.hamburger %}
+      <button class="hamburger" tabindex="-1">
+        <input type="checkbox" aria-label="toggle the mobile menu">
+        <span></span>
+        <span></span>
+        <span></span>
+        <section class="site-menu-mobile">
+        {% for item in site.data.navigation.items %}
+          <a href="{{ item.link | relative_url }}" {% if page.url == item.link %} class="current" {% endif %}>
+            {{ item.name }}
+          </a>
+        {% endfor %}
+        </section>
+      </button>
+      {% endif %}
+      
+      <section {% if site.data.navigation.hamburger %} class="site-menu" {% endif %}>
+        {% for item in site.data.navigation.items %}
+          <a href="{{ item.link | relative_url }}" {% if page.url == item.link %} class="current" {% endif %}>
+            {{ item.name }}
+          </a>
+        {% endfor %}      
+      </section>      
+    </nav>  
+  </div>
+</header>
+
+{% if page.url == "/" and site.header == true %}
+<section id="site-hero">
+  <div class="wrapper">
+  <h1 class="site-title">{{ site.title | markdownify | smartify | remove: "<p>" | remove: "</p>" }}</h1>
+  <p class="site-tagline">{{ site.tagline | markdownify | smartify | remove: "<p>" | remove: "</p>" }}</p>
+  <p class="site-description">{{ site.description | markdownify | smartify | remove: "<p>" | remove: "</p>" }}</p>
+  </div>
+</section>
+{% endif %}

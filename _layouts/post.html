@@ -1,0 +1,51 @@
+---
+layout: default
+---
+<main>
+  <article id="post" class="post">
+    <header class="post-header">
+      <h1 class="post-title">{{ page.title | markdownify | smartify | remove: "<p>" | remove: "</p>" }}</h1>
+      {% if page.tagline %}
+        <p class="post-tagline">{{ page.tagline | markdownify | smartify | remove: "<p>" | remove: "</p>" }}</p>
+      {% endif %}
+      <section class="post-meta">
+        {% include author.html %}
+        {% include image.html src=author_image size="thumb" class="avatar" %}
+        <div>
+          <time datetime="{{ page.date | date_to_xml_schema }}">
+            {{ page.date | date_to_long_string }}
+          </time>      
+          <address>
+            {{ author_href }}
+          </address>
+        </div>
+      </section>
+    </header>
+    
+    {% if page.image != site.defaults[0].values.image %}
+      <section class="post-image">
+        {% include image.html size="medium" src=featured_image alt=featured_alt caption=featured_caption %}
+      </section>  
+    {% endif %}
+    
+    <section class="post-article">
+      {{ content | replace: '<!--more-->', '<div class="anchor" id="more"></div>' }}
+    </section>
+
+    <footer class="post-footer">
+    {% if page.tags.size != 0  %}  
+      {% for tag in page.tags %}
+        <a href="{{ '/tags.html/#' | relative_url }}{{ tag }}" class="tag" title="see other articles tagged with #{{ tag }}" aria-label="see other articles tagged with #{{ tag }}">
+          {{ tag | strip | split: "," }}
+        </a>
+      {% endfor %}
+    {% endif %}
+    </footer>
+  </article>
+</main>
+
+{% if page.sidebar %}
+<aside>
+  {% include related-posts.html posts=3 %}
+</aside>
+{% endif %}
