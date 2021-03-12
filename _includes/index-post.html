@@ -40,7 +40,7 @@
   
   {% unless word_count == word_count_full_post %}
     <button class="read-more">
-      <a href="{{ post.url | relative_url }}/#more" title='about "{{ post.title }}"' aria-label='Read more about "{{ post.title }}"'>
+      <a href="{{ post.url | relative_url }}#more" title='about "{{ post.title }}"' aria-label='Read more about "{{ post.title }}"'>
         Read More
       </a>
     </button> 
@@ -49,7 +49,7 @@
   <footer class="post-footer">
   {% if post.tags.size != 0  %}  
     {% for tag in post.tags %}
-      <a href="{{ '/tags.html/#' | relative_url }}{{ tag }}" class="tag" title="see other articles tagged with #{{ tag }}" aria-label="see other articles tagged with #{{ tag }}">
+      <a href="{{ '/tags.html' | relative_url }}#{{ tag }}" class="tag" title="see other articles tagged with #{{ tag }}" aria-label="see other articles tagged with #{{ tag }}">
         {{ tag | strip | split: "," }}
       </a>
     {% endfor %}

@@ -3,7 +3,7 @@
 
 # More
 
-> [**demo**]()
+> [**demo**](https://wu-mng.github.io/more/)
 
 **More** is a minimalist theme for Jekyll, the static site generator. It provides a solid base to build a responsive, accessible, SEO-optimized website. Right now the layout is mostly suited for blogs, but you know, we have plans for expansion.
 

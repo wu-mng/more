@@ -35,7 +35,7 @@ layout: default
     <footer class="post-footer">
     {% if page.tags.size != 0  %}  
       {% for tag in page.tags %}
-        <a href="{{ '/tags.html/#' | relative_url }}{{ tag }}" class="tag" title="see other articles tagged with #{{ tag }}" aria-label="see other articles tagged with #{{ tag }}">
+        <a href="{{ '/tags.html' | relative_url }}#{{ tag }}" class="tag" title="see other articles tagged with #{{ tag }}" aria-label="see other articles tagged with #{{ tag }}">
           {{ tag | strip | split: "," }}
         </a>
       {% endfor %}
