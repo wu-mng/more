@@ -1,6 +1,3 @@
----
----
-
 # More
 
 > [**demo**](https://wu-mng.github.io/more/)
@@ -21,7 +18,7 @@
 
 - Highly customisable: define your own layout, typography and color values
 
-- Accessible: built with semantic HTML, progressive enhancements, optimized for keyboard and screen reader navigation
+- Accessible: built with semantic HTML, progressive enhancements; optimized for keyboard and screen reader navigation
 
 - Powerful stylesheet preprocessor: automatically generates baseline grid and modular scales
 
@@ -31,7 +28,7 @@
 
 - Optimized for search engines
 
-- Compatible with Git* Pages
+- Fully compatible with Github Pages
 
 ## Getting started
 

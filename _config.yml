@@ -103,8 +103,11 @@ plugins:
   - jekyll-seo-tag
   - jekyll-paginate
 
-titles_from_headings: # https://github.com/benbalter/jekyll-titles-from-headings
+titles_from_headings: # disable this plugin, see https://github.com/benbalter/jekyll-titles-from-headings
   enabled:  false
+
+include: # render these files, see https://github.com/benbalter/jekyll-optional-front-matter#one-potential-gotcha
+  - README.md
 
 exclude:
   - npm
