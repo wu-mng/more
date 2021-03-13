@@ -12,7 +12,7 @@ is add the `.lightbox` class to your image.
 
 <!--more-->
 
-However it is advisable to do so in combination with our own [responsive images](/layout/post-responsive-images):
+However it is advisable to do so in combination with our own [responsive images](layout-responsive-images):
 
 ```
 {% raw %}{% include image.html size="thumb" class="lightbox" src="1280px-van_gogh_-_starry_night_-_google_art_project.jpg" alt="The painting..." %}{% endraw %}

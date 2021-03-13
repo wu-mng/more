@@ -10,7 +10,7 @@
 # since they are much necessary for SEO purposes
 
 locale: en_US # Language of the site, the format is language_TERRITORY
-url: http://127.0.0.1:4000 # URL of the site. Needed to generate absolute links like RSS feed, OG images
+url: "wu-mng.github.io" # URL of the site. Needed to generate absolute links like RSS feed, OG images
 permalink: /:categories/:title # [OPTIONAL] post URL: "https://example.com/post-category/post-title"
 
 title: More # name of the website. Used for branding, like in navbar and home page.
