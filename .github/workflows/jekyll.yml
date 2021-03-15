@@ -1,0 +1,46 @@
+name: Build and deploy Jekyll site
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  jekyll:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup
+        uses: actions/checkout@v2
+
+      - name: Setup ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7
+
+      - name: Check links
+        uses: lycheeverse/lychee-action@v1.0.4
+        with:
+          args: --verbose --no-progress *.html *.md          
+
+      - name: Install dependencies & build site
+        uses: limjh16/jekyll-action-ts@v2
+        with:
+          enable_cache: true
+          format_output: true # Uses prettier https://prettier.io to format jekyll output HTML.
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_site
+
+      - name: Minify
+        uses: anthonyftwang/minify-action@v1
+        with:
+          path: "./_site"
+          
+      - name: Auto-commit to repository
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Minify source code
+          branch: ${{ github.ref }}
