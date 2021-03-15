@@ -8,7 +8,7 @@
   {% assign filtered_posts = site.posts | where: include.key, include.value %}
   {% for post in filtered_posts %}
   <li>
-    <a href="{{ post.url | relative_url }}" title="click to read the article" aria-label="Read the article {{ post.title }}">
+    <a href="{{ post.url | relative_url }}" title="click to read the article" aria-label="Read the article {{ post.title | smartify }}">
       {{ post.title | markdownify | smartify | remove: "<p>" | remove: "</p>" }}
     </a>
   </li>

@@ -25,7 +25,7 @@
           <!-- {{ tagsTotal }} -->
           <header class="post-header">
             <h2 class="post-title">
-              <a href="{{ post.url | relative_url }}" title="click to read the article {{ post.title }}" aria-label="Read the article {{ post.title }}">
+              <a href="{{ post.url | relative_url }}" title="click to read the article {{ post.title | smartify }}" aria-label="Read the article {{ post.title | smartify }}">
               {{ post.title | markdownify | smartify | remove: "<p>" | remove: "</p>" }}
               </a>
             </h2>
