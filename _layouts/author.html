@@ -18,7 +18,7 @@ layout: default
         <address>
           <span>{{ author.name }}</span><br>
             {{ author.role }}<br>
-            <a href="{% if author.contact contains "@" %}mailto:{% endif %}{{ author.contact }}" target="_blank" rel="author noopener" title="contact the author" aria-label="Contact {{ author.display_name }}">
+            <a href="{% if author.contact contains "@" %}mailto:{% endif %}{{ author.contact }}" target="_blank" rel="author noopener" title="contact the author" aria-label="Contact {{ author.name }}">
             {{ author.contact }}
             </a>
         </address>

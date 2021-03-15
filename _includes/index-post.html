@@ -40,7 +40,7 @@
   
   {% unless word_count == word_count_full_post %}
     <button class="read-more">
-      <a href="{{ post.url | relative_url }}#more" title='about "{{ post.title }}"' aria-label='Read more about "{{ post.title }}"'>
+      <a href="{{ post.url | relative_url }}#more" title="about {{ post.title }}" aria-label="Read more about {{ post.title | smartify }}">
         Read More
       </a>
     </button> 
