@@ -19,7 +19,7 @@ layout: default
     <ul class="posts-list">
       {% for post in tag[1] %}
         <li>
-          <a href="{{ post.url | relative_url }}" title="click to read the article" aria-label='Read the article "{{ post.title }}"'>
+          <a href="{{ post.url | relative_url }}" title="click to read the article" aria-label="Read the article {{ post.title }}">
             {{ post.title | markdownify | smartify | remove: "<p>" | remove: "</p>" }}
           </a>
         </li>
