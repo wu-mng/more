@@ -37,6 +37,7 @@
 2. Edit the `_config.yml` file to better suit your project 
 
 3. Adapt the navigation menu in `_data/navigation.yml` to your needs
+
 - (OPTIONAL) Add your authors profiles in `_authors/`
 
 - (OPTIONAL) Customise the site design by editing `_sass/_config.scss`
