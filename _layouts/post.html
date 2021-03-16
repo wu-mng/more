@@ -8,7 +8,7 @@ layout: default
       {% if page.tagline %}
         <p class="post-tagline">{{ page.tagline | markdownify | smartify | remove: "<p>" | remove: "</p>" }}</p>
       {% endif %}
-      <section class="post-meta">
+      <div class="post-meta">
         {% include author.html %}
         {% include image.html src=author_image size="thumb" class="avatar" %}
         <div>
@@ -19,18 +19,18 @@ layout: default
             {{ author_href }}
           </address>
         </div>
-      </section>
+      </div>
     </header>
     
     {% if page.image != site.defaults[0].values.image %}
-      <section class="post-image">
+      <div class="post-image">
         {% include image.html size="medium" src=featured_image alt=featured_alt caption=featured_caption %}
-      </section>  
+      </div>  
     {% endif %}
     
-    <section class="post-article">
+    <div class="post-article">
       {{ content | replace: '<!--more-->', '<div class="anchor" id="more"></div>' }}
-    </section>
+    </div>
 
     <footer class="post-footer">
     {% if page.tags.size != 0  %}  

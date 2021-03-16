@@ -6,8 +6,8 @@ layout: default
     <header>
       <h1>{{ page.title | markdownify | smartify | remove: "<p>" | remove: "</p>" }}</h1>
     </header>
-    <section>
-        {{ content | normalize_whitespace }}
-    </section>
+    <div>
+      {{ content | normalize_whitespace }}
+    </div>
   </article>
 </main>
