@@ -1,5 +1,5 @@
 ---
-title: "Markup: Text Alignment"
+title: "Text Alignment"
 author: "Chris Ames"
 contact: http://wptest.io/demo/author/dewde/
 categories:
@@ -14,6 +14,7 @@ tags:
 ### Default
 
 This is a paragraph. It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love. Completely neutral and not picking a side or sitting on the fence. It just is. It just freaking is. It likes where it is. It does not feel compelled to pick a side. Leave him be. It will just be better that way. Trust me.
+
 <!--more-->
 
 ### Left Align

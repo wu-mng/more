@@ -13,6 +13,7 @@ tags:
 > > [Mark Twain](http://www.brainyquote.com/quotes/quotes/m/marktwain163473.html)
 
 <!--more-->
+
 In order to align the author's name on the right, write the quote using the 
 following markdown formatting:
 

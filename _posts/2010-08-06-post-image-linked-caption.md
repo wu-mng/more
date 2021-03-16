@@ -15,9 +15,7 @@ tags:
 Stairs? Were we're going we don't need no stairs.
 {% endcapture %}
 
-<p>
 <figure>
   {{ fig_img | markdownify | remove: "<p>" | remove: "</p>" }}
   <figcaption>{{ fig_caption | markdownify | remove: "<p>" | remove: "</p>" }}</figcaption>
 </figure>
-</p>
