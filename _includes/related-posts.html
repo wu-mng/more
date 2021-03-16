@@ -1,4 +1,4 @@
-<section id="related-posts" class="flex-wrap">
+<div id="related-posts" class="flex-wrap">
 {% assign showRelatedPosts = include.posts %}
 {% capture posts %} 
   {% for post in site.posts %}
@@ -30,7 +30,7 @@
               </a>
             </h2>
           </header>
-          <section class="post-image">
+          <div class="post-image">
           <a href="{{ post.url | relative_url }}" role="presentation" aria-hidden="true" tabindex="-1">
           {% if post.image != site.defaults[0].values.image %}
             {% capture featured_image %} {{ post.image }} {% endcapture %}
@@ -40,7 +40,7 @@
             {% include image.html src=default_image size="small" %}
           {% endif %}
           </a>
-          </section>
+          </div>
           <footer class="post-footer">
             {% for tag in matchingTags %}
             <p class="tag">{{ tag }}</p>
@@ -61,4 +61,4 @@
 {% for i in (1..showRelatedPosts) %}
   {{ relatedPosts[i] }}
 {% endfor %}
-</section>
+</div>

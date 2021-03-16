@@ -8,23 +8,23 @@
         <span></span>
         <span></span>
         <span></span>
-        <section class="site-menu-mobile">
+        <div class="site-menu-mobile">
         {% for item in site.data.navigation.items %}
           <a href="{{ item.link | relative_url }}" {% if page.url == item.link %} class="current" {% endif %}>
             {{ item.name }}
           </a>
         {% endfor %}
-        </section>
+        </div>
       </button>
       {% endif %}
       
-      <section {% if site.data.navigation.hamburger %} class="site-menu" {% endif %}>
+      <div {% if site.data.navigation.hamburger %} class="site-menu" {% endif %}>
         {% for item in site.data.navigation.items %}
           <a href="{{ item.link | relative_url }}" {% if page.url == item.link %} class="current" {% endif %}>
             {{ item.name }}
           </a>
         {% endfor %}      
-      </section>      
+      </div>      
     </nav>  
   </div>
 </header>

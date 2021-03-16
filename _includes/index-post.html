@@ -16,7 +16,7 @@
       </time>
     </div>
   </header>
-  <section class="post-article">
+  <div class="post-article">
   {% if site.article_images == true and post.image != site.defaults[0].values.image %}
     {% capture featured_image %} {{ post.image }} {% endcapture %}
     {% capture featured_alt %} {{ post.alt }} {% endcapture %}
@@ -36,11 +36,11 @@
     {{ post.content | markdownify }}
     {% capture word_count %} {{ post.content | number_of_words }} {% endcapture %}
   {% endif %}
-  </section>
+  </div>
   
   {% unless word_count == word_count_full_post %}
     <button class="read-more">
-      <a href="{{ post.url | relative_url }}#more" title="about {{ post.title }}" aria-label="Read more about {{ post.title | smartify }}">
+      <a href="{{ post.url | relative_url }}{% unless post.excerpt.size > 0 %}#more{% endunless %}" title="about {{ post.title }}" aria-label="Read more about {{ post.title | smartify }}">
         Read More
       </a>
     </button> 
