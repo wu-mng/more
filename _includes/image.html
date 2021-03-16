@@ -67,7 +67,7 @@
         sizes="{{ sizes | strip }}"
         src="{{ site.paths.images | relative_url }}/{{ width | strip }}/{{ include.src | remove: 'assets/img/' | strip }}" 
         alt="{{ alt | strip }}"
-        width="{{ width | strip }}px"
+        width="{{ width | strip }}"
         loading="lazy">
   <figcaption id="{{ include.src | strip }}">
     <p>{{ include.caption | markdownify | strip_html | escape }}</p>
