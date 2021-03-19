@@ -44,7 +44,7 @@ layout: default
   </article>
 </main>
 
-{% if page.sidebar %}
+{% if site.posts.size > 2 and page.sidebar %}
 <aside>
   {% include related-posts.html posts=3 %}
 </aside>
