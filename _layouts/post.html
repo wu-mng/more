@@ -24,7 +24,11 @@ layout: default
     
     {% if page.image != site.defaults[0].values.image %}
       <div class="post-image">
-        {% include image.html size="medium" src=featured_image alt=featured_alt caption=featured_caption %}
+        {% if page.responsive %}
+          {% include image.html size="medium" src=featured_image alt=featured_alt caption=featured_caption %}
+        {% else %}
+          {% include featured-image.html src=featured_image class="img-medium" width="640" alt=featured_alt caption=featured_caption %}
+        {% endif %}
       </div>  
     {% endif %}
     
