@@ -3,7 +3,7 @@
 {%- include head.html -%}
 <body>
   {% include header.html %}
-  <div id="site-wrapper" class="wrapper flex-wrap {% if site.data.navigation.fixed %} nav-fixed {% endif %}">
+  <div id="site-wrapper" class="wrapper flex-wrap {% if site.fixed_menu %} nav-fixed {% endif %}">
     {{ content }}
     {% include lightbox.html %}
   </div>

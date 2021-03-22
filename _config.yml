@@ -1,17 +1,16 @@
-##############
-# More v1.0  #
-##############
+################
+# More v1.0.1  #
+################
 
 # ------------------------
 # 1. Site Setup [REQUIRED]
 # ------------------------
-# Be sure to fill the fields below (unless they're markes as [OPTIONAL]),  
-# even if you don't plan to use them as visual elements (e.g. title in home page), 
-# since they are much necessary for SEO purposes
+# Be sure to fill the fields below (unless they're marked as [OPTIONAL]),  
+# even if you don't plan to use them as visual elements (e.g. the title in home page), 
+# since they are very much necessary for SEO purposes
 
 locale: en_US # Language of the site, the format is language_TERRITORY
 url: "https://wu-mng.github.io" # URL of the site. Needed to generate absolute links like RSS feed, OG images
-permalink: /:categories/:title # [OPTIONAL] post URL: "https://example.com/post-category/post-title"
 
 title: More # name of the website. Used for branding, like in navbar and home page.
 tagline: minimalist Jekyll theme # [OPTIONAL] just below the title in home
@@ -22,36 +21,71 @@ author: wu-mng  # This is the default author of the articles. Also shows in the 
 author_image: "og.png" # [OPTIONAL] Picture of the author. The default site image is used otherwise (see below)
 email: wu-mng@example.com # [OPTIONAL] Default contact of the author.
 
+# ----------------------------------
+# 2. Site Navigation Menu [OPTIONAL]
+# ----------------------------------
+
+navigation:
+  Home: "/"
+  Edge Cases: "/category/edge-cases"
+  Layout: "/category/layout"
+  Markup: "/category/markup"
+  Post Formats: "/category/post-formats"
+  About: "/about"
+
+fixed_menu: true # choose whether the menu should 'stick' on top while scrolling or not
+hamburger_menu: true # show an 'hamburger' menu on mobile, or a normal horizontal menu  
+
+# -------------------------
+# 3. Site Design [OPTIONAL]
+# -------------------------
+
+#font: "" # stands for the CSS 'font-family' property, like "Arial"
+#heading_font: "" # as above, but for headings
+color: "#007500" # a color representative of your site (this is the green you see around)
+text_color: "#212121" # equals to 'black'
+background_color: "#f9f9f9" # equals to 'white'
+light_gray: "#e9ece9" # used, for example, as background-color for tags 
+dark_gray: "#515951" # used, for example, as background-color for footer
+
+
 # ------------------------------
-# 2. Home Page Layout [OPTIONAL]
+# 4. Home Page Layout [OPTIONAL]
 # ------------------------------
 
 header: true # Show the site title, tagline and description in home page
-# header-image: false # work-in-progress, this option is not available yet
-# sidebar: false # work-in-progress, this option is not available yet
+# header-image: false # this option is not available yet
+# sidebar: false # this option is not available yet
 article_images: true # Show the featured images of articles in home page.
-excerpt_separator: <!--more--> # If you insert this tag in your posts, the content before <!--more--> will appear on home page as excerpt 
+excerpt_separator: <!--more--> # If you insert this tag in your post, only the content before <!--more--> will appear on the home page 
 paginate: 5 # Number of articles to show on home page before a pagination menu appears
-paginate_path: /:num # Pagination url. Currently: www.example.com/2
 
 # ----------------------------
-# 3. Default values [OPTIONAL]
+# 5. Default image [OPTIONAL]
 # ----------------------------
-# There's usually no need to modify these values,
-# but you probably want to set your own "logo:" and "image:" values
+# Default site image used for open graph (social sharing) when a post 'featured' image is not present.
 
 defaults:
   - 
     scope:
       path: ""
     values:
-      layout: default
-      excerpt: "" # leave this empty, use the 'description' variable instead
-      logo: "assets/ico/512.png" # site logo
       image:
-        path: "assets/img/more_open_graph_default_image.png" # default featured image
+        path: "assets/img/more_open_graph_default_image.png" 
         height: 630
         width: 1200
+
+# ---------------------------------------
+# 6. Jekyll Configuration [VERY OPTIONAL] 
+# ---------------------------------------
+# Don't touch the values below, unless you know what you're doing.
+
+  - 
+    scope:
+      path: ""
+    values:
+      layout: default
+      excerpt: "" # leave this empty, use the 'description' variable (above) instead
   - 
     scope:
       path: ""
@@ -79,10 +113,8 @@ defaults:
       layout: categories
       key: 'categories'
 
-# ---------------------------------------
-# 4. Jekyll Configuration [VERY OPTIONAL] 
-# ---------------------------------------
-# Don't touch this, unless you know what you're doing.
+permalink: /:categories/:title # post URL: "https://example.com/post-category/post-title"
+paginate_path: /:num # Pagination url. Currently: www.example.com/2
 
 paths:
   images: /assets/img
@@ -103,7 +135,7 @@ plugins:
   - jekyll-seo-tag
   - jekyll-paginate
 
-titles_from_headings: # disable this plugin, see https://github.com/benbalter/jekyll-titles-from-headings
+titles_from_headings: # disable the plugin, see https://github.com/benbalter/jekyll-titles-from-headings
   enabled:  false
 
 include: # render these files, see https://github.com/benbalter/jekyll-optional-front-matter#one-potential-gotcha
@@ -152,8 +184,8 @@ exclude:
   #~ admins: 1234 # Facebook user ID for domain insights linked to a personal account
 
 #~ # For verifying ownership, e.g. via Google Search Console
-
-# google_site_verification: 1234
+# logo: "assets/ico/512.png" # site logo, displayed in google search
+# google_site_verification: 1234 # https://search.google.com/search-console/about
 
 # or, alternatively:
 

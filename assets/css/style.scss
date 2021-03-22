@@ -1,3 +1,14 @@
 ---
 ---
+// These custom values are set in _config.yml
+$font: {{ site.font | default: "null" }};
+$heading-font: {{ site.heading_font | default: "null" }};
+
+$base-color: {{ site.color | default: "#007500" }};
+$accent-color: #0c6b6b;
+$text-color: {{ site.text_color | default: "#212121" }};
+$background-color: {{ site.background_color | default: "#f9f9f9" }};
+$light-gray: {{ site.light_gray | default: "#e9ece9" }};
+$dark-gray: {{ site.dark_gray | default: "#515951" }};
+
 @import "more";
