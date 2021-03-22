@@ -21,7 +21,11 @@
     {% capture featured_image %} {{ post.image }} {% endcapture %}
     {% capture featured_alt %} {{ post.alt }} {% endcapture %}
     {% capture featured_caption %} {{ post.caption }} {% endcapture %}
-    {% include image.html size="thumb" class="post-image" src=featured_image alt=featured_alt caption=featured_caption %}
+    {% if post.responsive %}
+      {% include image.html size="thumb" class="post-image" src=featured_image alt=featured_alt caption=featured_caption %}
+    {% else %}
+      {% include featured-image.html src=featured_image class="post-image img-small" width="160" alt=featured_alt caption=featured_caption %}
+    {% endif %}
   {% endif %}
   
   {% capture word_count_full_post %} {{ post.content | number_of_words }} {% endcapture %}
@@ -39,7 +43,7 @@
   </div>
   
   {% unless word_count == word_count_full_post %}
-    <button class="read-more">
+    <button class="read-more" tabindex="-1">
       <a href="{{ post.url | relative_url }}{% unless post.excerpt.size > 0 %}#more{% endunless %}" title="about {{ post.title }}" aria-label="Read more about {{ post.title | smartify }}">
         Read More
       </a>
