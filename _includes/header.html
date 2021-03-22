@@ -1,27 +1,27 @@
-<header id="site-header" {% if site.data.navigation.fixed %} class="fixed" {% endif %}>
+<header id="site-header" {% if site.fixed_menu %} class="fixed" {% endif %}>
   <div class="wrapper flex-wrap">
     <a href="{{ '/' | relative_url }}" class="site-title" aria-label="home page">{{ site.title }}</a>
     <nav id="site-nav">
-      {% if site.data.navigation.hamburger %}
+      {% if site.hamburger_menu %}
       <button class="hamburger" tabindex="-1">
         <input type="checkbox" aria-label="toggle the mobile menu">
         <span></span>
         <span></span>
         <span></span>
         <div class="site-menu-mobile">
-        {% for item in site.data.navigation.items %}
-          <a href="{{ item.link | relative_url }}" {% if page.url == item.link %} class="current" {% endif %}>
-            {{ item.name }}
+        {% for item in site.navigation %}
+          <a href="{{ item[1] | relative_url }}" {% if page.url == item[1] %} class="current" {% endif %}>
+            {{ item[0] }}
           </a>
         {% endfor %}
         </div>
       </button>
       {% endif %}
       
-      <div {% if site.data.navigation.hamburger %} class="site-menu" {% endif %}>
-        {% for item in site.data.navigation.items %}
-          <a href="{{ item.link | relative_url }}" {% if page.url == item.link %} class="current" {% endif %}>
-            {{ item.name }}
+      <div {% if site.hamburger_menu %} class="site-menu" {% endif %}>
+        {% for item in site.navigation %}
+          <a href="{{ item[1] | relative_url }}" {% if page.url == item[1] %} class="current" {% endif %}>
+            {{ item[0] }}
           </a>
         {% endfor %}      
       </div>      

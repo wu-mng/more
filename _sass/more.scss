@@ -1,4 +1,4 @@
-/*! m-type.css v0.9 | GNU GPL v3.0 | https://gitlab.com/wu-mng/m-type */
+/*! m-type.css v1.0 | GNU GPL v3.0 | https://gitlab.com/wu-mng/m-type */
 /* changelog */
 /*-----------------------------------------------------------------------------
   TABLE OF CONTENTS 
@@ -104,8 +104,33 @@
 
 /* 0.2 variables...............................................Scss variables*/ 
 $nav-height: 4rem;
-$nav-current-item: 3px solid $primary;
-$nav-next-item: 3px solid $lightgray;
+$nav-current-item: 3px solid $base-color;
+$nav-next-item: 3px solid $light-gray;
+
+$font-family: $font, // font set by the user in '_config.yml'
+  -apple-system, 
+  BlinkMacSystemFont, // Chrome on Mac OS X 
+  "Segoe UI", // Windows
+  Roboto, // Android
+  Oxygen, Ubuntu, Cantarell, // Linux
+  "Fira Sans", // Firefox OS
+  "Droid Sans", // Old Android
+  "Helvetica Neue", Arial, sans-serif;
+$mono-font: SFMono-Regular, Menlo, Monaco, // Mac
+  Consolas, // Windows
+  "Andale Mono", // Old Windows
+  "Ubuntu Mono", "Liberation Mono", // Linux
+  "Courier New", monospace;
+
+// aliases for the colors set in "_config.yml"
+$base: $base-color;
+$primary: $base-color;
+$accent: $accent-color;
+$secondary: $accent-color;
+$black: $text-color;
+$white: $background-color;
+$lightgray: $light-gray;
+$darkgray: $dark-gray;
 
 /* 0.3....................................................Classes for testing*/
 // * { border: 1px dotted red;}
@@ -195,7 +220,7 @@ footer#main-footer {
 
 /* 1.3 Headings.............<h1><h6> */
 h1, h2, h3, h4, h5, h6 { 
-  font-family: $headings-font-family;
+  font-family: $heading-font, $font-family; // font set by the user in _config.yml, body font stack as a fallback
   font-weight: 500;
   margin: 0;
   @include baseline;
@@ -250,7 +275,7 @@ pre {
 }
 
 .highlight {
-  background-color: $terminal; 
+  background-color: #1c1c1c; 
 }
 
 /* correct a bug introduced by normalize, causing this to overlap the mobile menu */
