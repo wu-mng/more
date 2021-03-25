@@ -18,14 +18,7 @@
   </header>
   <div class="post-article">
   {% if site.article_images == true and post.image != site.defaults[0].values.image %}
-    {% capture featured_image %} {{ post.image }} {% endcapture %}
-    {% capture featured_alt %} {{ post.alt }} {% endcapture %}
-    {% capture featured_caption %} {{ post.caption }} {% endcapture %}
-    {% if post.responsive %}
-      {% include image.html size="thumb" class="post-image" src=featured_image alt=featured_alt caption=featured_caption %}
-    {% else %}
-      {% include featured-image.html src=featured_image class="post-image img-small" width="160" alt=featured_alt caption=featured_caption %}
-    {% endif %}
+    {% include image.html size="thumb" class="post-image" src=post.image alt=post.alt caption=post.caption %}
   {% endif %}
   
   {% capture word_count_full_post %} {{ post.content | number_of_words }} {% endcapture %}

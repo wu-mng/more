@@ -8,15 +8,11 @@ layout: default
       <h1 class="post-title">{{ author.name }}</h1>
       <div class="post-meta">
         {% if author.image %}
-          {% capture author_image %} 
-            {{ author.image }}
-          {% endcapture %}
-          {% include image.html src=author_image size="thumb" class="avatar" %}
+          {% include image.html src=author.image size="thumb" class="avatar" %}
         {% else %}
           <p class="avatar"></p>
         {% endif %}
         <address>
-          <span>{{ author.name }}</span><br>
             {{ author.role }}<br>
             <a href="{% if author.contact contains "@" %}mailto:{% endif %}{{ author.contact }}" target="_blank" rel="author noopener" title="contact the author" aria-label="Contact {{ author.name }}">
             {{ author.contact }}

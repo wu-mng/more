@@ -13,14 +13,16 @@ and device perfectly. But how to use them?
 
 <!--more-->
 
-First, place your images in `/assets/images/uploads/`,   
-then start the conversion script by typing `npm run rig`   
-in the `/npm` directory (...ok, doing the task manually it's not ideal, so 
-we're working on an automated process for future versions).
+- Edit `_config.yml` and set `responsive_images: true`
+- Place your images in `/assets/images/uploads/`   
+- Start the npm script by typing `npm run rig` while in the `/npm` directory 
 
-Please be aware that the original files will be optimized, and then **deleted**;
+(...ok, a bit convoluted, I know, but we're working on an automated process...).
+
+Note that **npm** needs to be installed in your system, refer to [https://www.npmjs.com/get-npm](https://www.npmjs.com/get-npm) for instructions.
+
+Also be aware that the original files will be optimized, and then **deleted**;
 see `npm/uploads_cleanup.js` for more informations.
-
 
 But let's see how this works in practice. To get a **medium** size image in your post, 
 use the following code:

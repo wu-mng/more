@@ -48,7 +48,6 @@ background_color: "#f9f9f9" # equals to 'white'
 light_gray: "#e9ece9" # used, for example, as background-color for tags 
 dark_gray: "#515951" # used, for example, as background-color for footer
 
-
 # ------------------------------
 # 4. Home Page Layout [OPTIONAL]
 # ------------------------------
@@ -60,17 +59,18 @@ article_images: true # Show the featured images of articles in home page.
 excerpt_separator: <!--more--> # If you insert this tag in your post, only the content before <!--more--> will appear on the home page 
 paginate: 5 # Number of articles to show on home page before a pagination menu appears
 
-# ----------------------------
-# 5. Default image [OPTIONAL]
-# ----------------------------
-# Default site image used for open graph (social sharing) when a post 'featured' image is not present.
+# --------------------
+# 5. Images [OPTIONAL]
+# --------------------
+
+responsive_images: false # see https://wu-mng.github.io/more/layout/layout-responsive-images for more informations
 
 defaults:
   - 
     scope:
       path: ""
     values:
-      image:
+      image: # Default site image used for open graph (social sharing) when a post 'featured' image is not present.
         path: "assets/img/more_open_graph_default_image.png" 
         height: 630
         width: 1200
