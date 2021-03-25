@@ -35,18 +35,13 @@
 1. Clone or fork this project
 
 2. Edit the `_config.yml` file to better suit your project 
+- Have more than one author? Add them in the `_authors/` folder
 
-3. Adapt the navigation menu in `_data/navigation.yml` to your needs
-
-- (OPTIONAL) Add your authors profiles in `_authors/`
-
-- (OPTIONAL) Customise the site design by editing `_sass/_config.scss`
-  
-  
+- Want a more personal design?  Edit `_sass/_config.scss`
 
 The configuration files are thoroughly commented; for pratical usage examples, you can look at the posts in the [demo site]() (most of them are pretty self-explanatory), or dig into the `_posts` folder.
 
-## Future features 
+## Future features
 
 - [ ] Contact form
 
