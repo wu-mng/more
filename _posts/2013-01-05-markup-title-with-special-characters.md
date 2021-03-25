@@ -1,6 +1,6 @@
 ---
 title: 'Title with Special Characters°^!§$%&(){}=?#<>_-including "smart" quotes'
-author: Nerd A
+author: Another Author
 categories:
   - Markup
 tags:

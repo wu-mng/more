@@ -1,6 +1,6 @@
 ---
 title: "Sticky Post"
-author: Nerd A
+author: Another Author
 categories:
   - Markup
 tags:

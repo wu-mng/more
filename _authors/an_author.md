@@ -1,9 +1,9 @@
 ---
-name: A Nerd
+name: An Author
 role: Chief Editor
-contact: a.nerd@example.com
+contact: an.author@example.com
 image: og.png
 ---
-A Nerd is anerd is A Nerd.
+An Author is an.author is An Author.
 
 Biography goes here, Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enimad minim veniam, quis nostrud exercitation ullamco laboris nisi utaliquip ex ea commodo consequat.
