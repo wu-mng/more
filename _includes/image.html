@@ -2,18 +2,6 @@
   {{ site.defaults[0].values.image.path }} 
 {% endcapture %}
 
-{% capture featured_image %} 
-  {{ page.image }} 
-{% endcapture %}
-
-{% capture featured_alt %} 
-  {{ page.alt }} 
-{% endcapture %}
-
-{% capture featured_caption %} 
-  {{ page.caption }} 
-{% endcapture %}
-
 {% capture width %}
   {% case include.size %}
     {% when "thumb" %}
@@ -25,25 +13,29 @@
   {% endcase %}
 {% endcapture %}
 
-{% capture srcset %}
-  {% capture sizes %}
-    {%- for size in site.data.responsives.settings.srcset -%}
-      {{ site.paths.images | relative_url }}/{{ size | strip }}/{{ include.src | remove: 'assets/img/' | strip }} {{ size | strip }}w,
-    {%- endfor -%}
-  {% endcapture %}
-  {{ sizes | split: ',' | join: ', ' }}
-{% endcapture %}
+{% if site.responsive_images %}
 
-{% capture sizes %}
-  {% case include.size %}
-  {% when "thumb" %}
-    {{ site.data.responsives.settings.thumb | strip }}
-  {% when "small" %}
-    {{ site.data.responsives.settings.small | strip }}
-  {% when "medium" %}
-    {{ site.data.responsives.settings.medium | strip }}    
-  {% endcase %}
-{% endcapture %}
+  {% capture srcset %}
+    {% capture sizes %}
+      {%- for size in site.data.responsives.settings.srcset -%}
+        {{ site.paths.images | relative_url }}/{{ size | strip }}/{{ include.src | remove: 'assets/img/' | strip }} {{ size | strip }}w,
+      {%- endfor -%}
+    {% endcapture %}
+    {{ sizes | split: ',' | join: ', ' }}
+  {% endcapture %}
+
+  {% capture sizes %}
+    {% case include.size %}
+    {% when "thumb" %}
+      {{ site.data.responsives.settings.thumb | strip }}
+    {% when "small" %}
+      {{ site.data.responsives.settings.small | strip }}
+    {% when "medium" %}
+      {{ site.data.responsives.settings.medium | strip }}    
+    {% endcase %}
+  {% endcapture %}
+
+{% endif %}
 
 {% capture alt %}
   {% if include.alt %}
@@ -63,9 +55,11 @@
 
 
 <figure class="img-{{ include.size | strip }} {{ include.class | strip }}" style="max-width:{{ width | strip }}px" {{ accessibility | strip }}>
-  <img  srcset="{{ srcset | strip }}"
-        sizes="{{ sizes | strip }}"
-        src="{{ site.paths.images | relative_url }}/{{ width | strip }}/{{ include.src | remove: 'assets/img/' | strip }}" 
+  <img  {% if site.responsive_images %} 
+        srcset="{{ srcset | strip }}"
+        sizes="{{ sizes | strip }}" 
+        {% endif %}
+        src="{{ site.paths.images | relative_url }}/{%- if site.responsive_images -%}{{ width | strip }}/{%- endif -%}{{ include.src | remove: 'assets/img/' | strip }}" 
         alt="{{ alt | strip }}"
         width="{{ width | strip }}"
         loading="lazy">
@@ -75,5 +69,5 @@
 </figure>  
 
 {% comment %} 
-usage: {% include image.html src="filename.jpg" size="medium" alt="" caption="" %}
+usage: {% include image.html src="filename.jpg" size="thumb/small/medium" alt="your alt text" caption="your caption" %}
 {% endcomment %}

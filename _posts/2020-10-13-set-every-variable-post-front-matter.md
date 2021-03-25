@@ -1,9 +1,8 @@
 ---
 title: "Demo Post"
 tagline: "that makes use of every option in Front Matter"
-author: A Nerd
+author: An Author
 image: assets/img/1280px-vincent_van_gogh_-_de_slaapkamer_-_google_art_project.jpg
-responsive: true
 alt: This is the alt text of a featured image.
 caption: This is the **caption** text of a featured image.
 excerpt: This article sets any possible variable in the post's Front Matter. Also, as part of the demo, this is a manually written `excerpt`... and it even contains some **markdown** and <strong>HTML</strong> formatting in it. Clever, innit?
@@ -24,11 +23,11 @@ Here's what the post's Front Matter looks like:
 ---
 title: "Demo Post"
 tagline: "that makes use of every option in Front Matter"
-author: anerd
+author: An Author
 image: assets/img/1280px-vincent_van_gogh_-_de_slaapkamer_-_google_art_project.jpg
 alt: This is the alt text of a featured image.
 caption: This is the **caption** text of a featured image.
-excerpt: This article sets any possible variables in the post's Front Matter. Also, as part of the demo, this is a manually written `excerpt`... and it even contains some **_markdown_** and <strong>HTML</strong> formatting in it. Clever, innit?
+excerpt: This article sets any possible variable in the post's Front Matter. Also, as part of the demo, this is a manually written `excerpt`... and it even contains some **markdown** and <strong>HTML</strong> formatting in it. Clever, innit?
 slug: set-every-variable-post-front-matter-now-with-custom-slug
 categories:
   - Markup

@@ -1,7 +1,6 @@
 ---
 title: "Featured Image (Vertical)"
 image: assets/img/rembrandt_and_saskia_in_the_scene_of_the_prodigal_son_-_google_art_project.jpg
-responsive: true
 alt: '"Rembrandt and Saskia in the parable of the prodigal son" is a painting by the Dutch master Rembrandt. It portrays two people who had been identified as Rembrandt himself and his wife Saskia. In the Protestant contemporary world, the theme of the prodigal son was a frequent subject for works of art due to its moral background.' 
 caption: '"Rembrandt and Saskia in the parable of the prodigal son" by Rembrandt - public domain image'
 categories:

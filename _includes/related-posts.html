@@ -33,9 +33,7 @@
           <div class="post-image">
           <a href="{{ post.url | relative_url }}" role="presentation" aria-hidden="true" tabindex="-1">
           {% if post.image != site.defaults[0].values.image %}
-            {% capture featured_image %} {{ post.image }} {% endcapture %}
-            {% capture featured_alt %} {{ post.alt }} {% endcapture %}
-            {% include image.html src=featured_image alt=featured_alt size="small" %}
+            {% include image.html src=post.image size="small" alt=post.alt %}
           {% else %}
             {% include image.html src=default_image size="small" %}
           {% endif %}
