@@ -1,14 +1,38 @@
 ---
 ---
-// These custom values are set in _config.yml
+// These are the custom values set in _config.yml
+
 $font: {{ site.font | default: "null" }};
 $heading-font: {{ site.heading_font | default: "null" }};
-
 $base-color: {{ site.color | default: "#007500" }};
-$accent-color: #0c6b6b;
 $text-color: {{ site.text_color | default: "#212121" }};
 $background-color: {{ site.background_color | default: "#f9f9f9" }};
+
+{% if site.black %}
+  $black: {{ site.black | default: "#212121" }};
+{% else %}
+  $black: $text-color;
+{% endif %}
+
+{% if site.white %}
+  $white: {{ site.white | default: default: "#f9f9f9" }};
+{% else %}
+  $white: $background-color;
+{% endif %}
+
 $light-gray: {{ site.light_gray | default: "#e9ece9" }};
 $dark-gray: {{ site.dark_gray | default: "#515951" }};
+
+:root {
+  --font: {{ site.font | default: "null" }};
+  --heading-font: {{ site.heading_font | default: "null" }};
+  --base-color: #{$base-color};
+  --text-color: #{$text-color};
+  --background-color: #{$background-color};
+  --black: #{$black};
+  --white: #{$white};
+  --light-gray: #{$light-gray};
+  --dark-gray: #{$dark-gray};
+}
 
 @import "more";

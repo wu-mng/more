@@ -39,14 +39,15 @@ hamburger_menu: true # show an 'hamburger' menu on mobile, or a normal horizonta
 # -------------------------
 # 3. Site Design [OPTIONAL]
 # -------------------------
-
-#font: "" # stands for the CSS 'font-family' property, like "Arial"
-#heading_font: "" # as above, but for headings
+# font: '"Open sans"' # stands for the CSS 'font-family' property
+# heading_font: '"Roboto"' # as above, but for headings
 color: "#007500" # a color representative of your site (this is the green you see around)
 text_color: "#212121" # equals to 'black'
 background_color: "#f9f9f9" # equals to 'white'
 light_gray: "#e9ece9" # used, for example, as background-color for tags 
 dark_gray: "#515951" # used, for example, as background-color for footer
+# black: ; # optional, if you want it to be different than text-color
+# white: ; optional, if you want it to be different than background-color
 
 # ------------------------------
 # 4. Home Page Layout [OPTIONAL]

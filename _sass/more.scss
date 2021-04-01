@@ -104,8 +104,6 @@
 
 /* 0.2 variables...............................................Scss variables*/ 
 $nav-height: 4rem;
-$nav-current-item: 3px solid $base-color;
-$nav-next-item: 3px solid $light-gray;
 
 $font-family: $font, // font set by the user in '_config.yml'
   -apple-system, 
@@ -122,22 +120,27 @@ $mono-font: SFMono-Regular, Menlo, Monaco, // Mac
   "Ubuntu Mono", "Liberation Mono", // Linux
   "Courier New", monospace;
 
-// aliases for the colors set in "_config.yml"
-$base: $base-color;
-$primary: $base-color;
-$accent: $accent-color;
-$secondary: $accent-color;
-$black: $text-color;
-$white: $background-color;
-$lightgray: $light-gray;
-$darkgray: $dark-gray;
+@mixin nav-current-item($important:false) {
+  @if $important {
+    border-bottom: 3px solid $base-color !important;
+    border-bottom: 3px solid var(--base-color) !important;
+  } @else {
+    border-bottom: 3px solid $base-color;
+    border-bottom: 3px solid var(--base-color);
+  }
+}
+
+@mixin nav-next-item {
+  border-bottom: 3px solid $light-gray;
+  border-bottom: 3px solid var(--light-gray);
+}  
 
 /* 0.3....................................................Classes for testing*/
 // * { border: 1px dotted red;}
 
 // accessibility: keyboard navigation 
 *:focus-visible { 
-  border-bottom: 3px solid $primary !important;
+  @include nav-current-item(true);
   outline: none;
   padding: 3px;
 }
@@ -161,14 +164,18 @@ html {
   @if $is-font-laptop { @include laptop { font-size: px-to-percent($font-laptop); } }
   @if $is-font-desktop { @include desktop { font-size: px-to-percent($font-desktop); } }
 }
-  
+
 body {
   background-color: $background-color;
+  background-color: var(--background-color);
   color: $text-color;
-  font-family: $font-family;
+  color: var(--text-color);
+  font-family: var(--font), $font-family;
   @include typography;
   overflow-wrap: break-word;
   word-wrap: break-word;
+  -ms-hyphens: auto;
+  -webkit-hyphens: auto;
   hyphens: auto;
   margin: 0;
   // sticky footer
@@ -206,8 +213,10 @@ aside {
 article > * { overflow: hidden; }
 
 footer#main-footer {
-  background: $darkgray;
+  background-color: $dark-gray;
+  background-color: var(--dark-gray);
   color: $white;
+  color: var(--white);
   padding: 0 1rem;
   p { 
     @include typography(0);
@@ -215,12 +224,11 @@ footer#main-footer {
   }
 }
 
-
 /* 1.2 Navigation...........<nav> */
 
 /* 1.3 Headings.............<h1><h6> */
-h1, h2, h3, h4, h5, h6 { 
-  font-family: $heading-font, $font-family; // font set by the user in _config.yml, body font stack as a fallback
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--heading-font), var(--font), $heading-font, $font-family;
   font-weight: 500;
   margin: 0;
   @include baseline;
@@ -239,8 +247,11 @@ h6 { @include typography(1, 1.2); }
 blockquote, ol, p, ul, li, dt, dd { @include baseline; }
 
 blockquote {
-  border-left: 3px solid $lightgray;
-  color: $darkgray;
+  border-left: 3px solid;
+  border-color: $light-gray;
+  border-color: var(--light-gray);
+  color: $dark-gray;
+  color: var(--dark-gray);
   @include typography(2);
   font-style: italic;
   font-weight: 300;
@@ -264,12 +275,13 @@ pre, code { font-family: $mono-font; }
 pre { 
   border-radius: 0.1875rem;
   padding: 1rem;
-  white-space: break-spaces; 
+  white-space: pre-wrap; 
 }
 
 .highlighter-rouge {
   @include baseline;
-  background-color: $lightgray;
+  background-color: $light-gray;
+  background-color: var(--light-gray);
   border-radius: 3px;
   padding: 0 .5rem;
 }
@@ -291,11 +303,15 @@ a:visited,
 a:focus,
 a:hover,
 a:active {
-  color: inherit;
+  color: $text-color;
+  color: var(--text-color);
   text-decoration: none;
 }
 
-a:active, a:hover { color: $primary; }
+a:active, a:hover { 
+  color: $base-color;
+  color: var(--base-color);
+}
 
 p a { border-bottom: 1px solid; }
 
@@ -329,7 +345,8 @@ button {
 
 /* 1.8 Images...............<img>, <figure>, <figcaption> */
 img::before {
-  color: $darkgray;
+  color: $dark-gray;
+  color: var(--dark-gray);
   @include typography(0);
   @include baseline(1, padding);
 }
@@ -337,7 +354,8 @@ img, figure { max-width: 100%; }
 figure { margin: 0; }
 
 figcaption, figcaption p {
-  color: $darkgray;
+  color: $dark-gray;
+  color: var(--dark-gray);
   @include typography(0); 
   font-style: italic;
   margin: 0;
@@ -362,7 +380,10 @@ th {
   padding: 1rem;
   text-align: left; 
 }
-tr:nth-child(even) { background-color: $lightgray; }
+tr:nth-child(even) { 
+  background-color: $light-gray;
+  background-color: var(--light-gray);
+}
 td { padding: 1rem; }
 
 /* 1.10 Media................<audio>, <object>, <video> */
@@ -379,8 +400,10 @@ td { padding: 1rem; }
   
 /* 2.2...............................................................Buttons */
 .button-primary {
-  background: $primary;
-  color: $white !important;
+  background-color: $base-color;
+  background-color: var(--base-color);
+  color: $white;
+  color: var(--white);
   border-radius: 0.25rem; 
   display: inline-block;
   margin: 1rem 0;
@@ -388,7 +411,8 @@ td { padding: 1rem; }
 }
 
 a:hover.button-primary  {
-  background: $darkgray !important;
+  background-color: $dark-gray;
+  background-color: var(--dark-gray);
 } 
 
 /* 2.3.............................................................Carousels */
@@ -455,6 +479,7 @@ a:hover.button-primary  {
 
 .lightbox-content p { 
   color: $white;
+  color: var(--white);
   @include typography(1);
   text-align: center;
 }
@@ -466,8 +491,11 @@ a:hover.button-primary  {
 /* 3.1 SITE LAYOUT....................shared components used by every layout */
 /* 3.1.1 ......................................................Site Header */
 #site-header {
-  background-color: $white;
-  border-bottom: 1px solid $lightgray;
+  background-color: $background-color;
+  background-color: var(--background-color);
+  border-bottom: 1px solid;
+  border-color: $light-gray;
+  border-color: var(--light-gray);
 
   .site-title { 
     @include typography(2);
@@ -480,7 +508,6 @@ a:hover.button-primary  {
 }
 
 #site-hero {
-  //background-color: $lightgray;
   display: flex;
   margin: auto;
   margin-top: $nav-height;
@@ -491,7 +518,6 @@ a:hover.button-primary  {
   width: 100%;
   
   .wrapper { 
-    //background-color: $lightgray;
     margin: auto;
     margin-top: 4rem;
     padding: 4rem 1rem;
@@ -505,7 +531,8 @@ a:hover.button-primary  {
     @include baseline(-1); 
   }
   .site-tagline {
-    color: $darkgray; 
+    color: $dark-gray;
+    color: var(--dark-gray);
     @include typography(3);
     font-weight: 300;
   }
@@ -519,37 +546,43 @@ a:hover.button-primary  {
 
 #site-nav {
   a { 
-    border-bottom: 3px solid $white;
+    border-bottom: 3px solid;
+    border-color: $white;
+    border-color: var(--white);
     display: inline-block;
     @include typography(1, 1.2);
     padding: calc(1rem + 3px) .75rem;
   }
   a:active { 
     background: #f2f2f2;
-    border-bottom: $nav-current-item;
+    @include nav-current-item;
+    border-color: $base-color;
+    border-color: var(--base-color);
+    
   } 
   a:hover {
     background: #f2f2f2;
-    border-bottom: $nav-next-item;
-    color: $primary;  
+    @include nav-next-item;
+    color: $base-color;
+    color: var(--base-color);
     text-decoration: none;
   }
   a.current, a.current:visited { 
-    border-bottom: $nav-current-item;
+    @include nav-current-item;
   }
   
   // non-mobile menu
   .site-menu { 
     display: none;
-    @include tablet { display: block; } 
+    @include laptop { display: block; } 
   }
-
   
   // mobile menu
   .hamburger {
-    @include tablet { display: none; }  
+    @include laptop { display: none; }  
     padding: 1rem 0;
     /* prevents text selection */
+    -ms-user-select: none;
     -webkit-user-select: none;
     user-select: none;
     
@@ -565,11 +598,15 @@ a:hover.button-primary  {
       -webkit-touch-callout: none;  
     }
     
-    input:focus-visible ~ span { background: $primary; }
+    input:focus-visible ~ span { 
+      background: $base-color;
+      background: var(--base-color);
+    }
     
     /* hamburger 'rows' */
     span {
-      background: $black;
+      background-color: $black;
+      background-color: var(--black);
       border-radius: 3px;
       display: block;
       width: 2rem;
@@ -653,15 +690,22 @@ a:hover.button-primary  {
   @include baseline(0.5);
 }
 
-.post-title a { color: $black; border-bottom: none; }
+.post-title a { 
+  color: $text-color;
+  color: var(--text-color); 
+  border-bottom: none; 
+}
 .post-title a:active, 
 .post-title a:hover { 
-  border-bottom: 2px solid $black;
+  border-bottom: 2px solid;
+  border-color: $black;
+  border-color: var(--black);
   padding-bottom: 1px;
 }
 
 .post-tagline { 
-  color: $darkgray; 
+  color: $dark-gray;
+  color: var(--dark-gray);
   @include typography(3);
   margin-top: 0;
   @include baseline(0.5);
@@ -685,21 +729,24 @@ border-bottom: 1px solid;
   padding: 0.5rem 1rem; 
 }
 .pagination #current-page {
-  border-bottom: $nav-current-item;
+  @include nav-current-item;
 }
 
 .pagination a:hover {
   background: #f2f2f2;
-  border-bottom: $nav-next-item;
+  @include nav-next-item;
 }
 
 /* 3.1.5 .............................................................Tags */ 
 .tag::before { content: "#";}
+
 .tag, 
 .tag:visited { 
-  background: $lightgray;
+  color: $dark-gray;
+  color: var(--dark-gray);
+  background-color: $light-gray;
+  background-color: var(--light-gray);
   border-radius: 3px;
-  color: $darkgray;
   display: inline-block;
   font-weight: normal;
   @include typography(0.5, 1);
@@ -709,8 +756,10 @@ border-bottom: 1px solid;
 
 .tag:hover,
 .tag:active { 
-  background: $darkgray;
-  color: $lightgray;
+  color: $light-gray;
+  color: var(--light-gray);
+  background-color: $dark-gray;
+  background-color: var(--dark-gray);
 }
 
 
@@ -720,13 +769,14 @@ border-bottom: 1px solid;
     font-weight: normal; 
   }
   .post { 
-    border-bottom: 1px dotted $lightgray;
+    border-bottom: 1px dotted;
+    border-color: $light-gray;
+    border-color: var(--light-gray);
     margin-bottom: 4rem;
     padding-bottom: 4rem; 
   }
   .post-title { 
     @include typography(5, 1.2);
-    // @include baseline(-.75);
     font-weight: 500;
   }
   .post-tagline { 
@@ -758,8 +808,10 @@ border-bottom: 1px solid;
       padding: 3px 10px;
     }
     .tag:hover {
-      background: $lightgray;
-      color: $darkgray;
+      color: $dark-gray;
+      color: var(--dark-gray);
+      background-color: $light-gray;
+      background-color: var(--light-gray);
     }
     a { border: none; }
   }
@@ -868,8 +920,10 @@ border-bottom: 1px solid;
   .tag:focus,
   .tag:hover,
   .tag:active {
-    background: $lightgray;
-    color: $darkgray;  
+    color: $dark-gray;
+    color: var(--dark-gray);
+    background-color: $light-gray;
+    background-color: var(--light-gray);
   }
 
 }
