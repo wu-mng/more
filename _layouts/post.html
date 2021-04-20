@@ -1,7 +1,7 @@
 ---
 layout: default
 ---
-<main>
+<main {% if site.posts.size > 2 and page.sidebar %}class="with-sidebar"{% endif %}>
   <article id="post" class="post">
     <header class="post-header">
       <h1 class="post-title">{{ page.title | markdownify | smartify | remove: "<p>" | remove: "</p>" }}</h1>

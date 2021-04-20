@@ -4,7 +4,7 @@
 
 $font: {{ site.font | default: "null" }};
 $heading-font: {{ site.heading_font | default: "null" }};
-$base-color: {{ site.color | default: "#007500" }};
+$base-color: {{ site.color | default: "#008100" }};
 $text-color: {{ site.text_color | default: "#212121" }};
 $background-color: {{ site.background_color | default: "#f9f9f9" }};
 
@@ -21,6 +21,7 @@ $background-color: {{ site.background_color | default: "#f9f9f9" }};
 {% endif %}
 
 $light-gray: {{ site.light_gray | default: "#e9ece9" }};
+$gray: {{ site.gray | default: "#f2f2f2" }};
 $dark-gray: {{ site.dark_gray | default: "#515951" }};
 
 :root {
@@ -32,6 +33,7 @@ $dark-gray: {{ site.dark_gray | default: "#515951" }};
   --black: #{$black};
   --white: #{$white};
   --light-gray: #{$light-gray};
+  --gray: #{$gray};
   --dark-gray: #{$dark-gray};
 }
 
