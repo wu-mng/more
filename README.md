@@ -16,7 +16,7 @@
 
 - Clear, minimalist design: perfect as starting point, yet complete and ready to use
 
-- Highly customisable: define your own layout, typography and color values
+- Highly customisable: define your own layout, typography and colors
 
 - Accessible: built with semantic HTML, progressive enhancements; optimized for keyboard and screen reader navigation
 
@@ -24,7 +24,7 @@
 
 - Responsive layout: perfectly adapts to different screens and devices
 
-- Responsive images: generates pictures at different sizes from a single image
+- Responsive images: generates pictures at different sizes from a single image 
 
 - Optimized for search engines
 
@@ -39,7 +39,7 @@
 
 - Want a more personal design?  Edit `_sass/_config.scss`
 
-The configuration files are thoroughly commented; for pratical usage examples, you can look at the posts in the [demo site]() (most of them are pretty self-explanatory), or dig into the `_posts` folder.
+The configuration files are thoroughly commented; for pratical usage examples, you can look at the posts in the [demo site](https://wu-mng.github.io/more/) (most of them are pretty self-explanatory), or dig into the `_posts` folder.
 
 ## Future features
 
