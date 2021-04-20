@@ -1,5 +1,5 @@
 ################
-# More v1.0.1  #
+# More v1.0.2  #
 ################
 
 # ------------------------
@@ -41,11 +41,12 @@ hamburger_menu: true # show an 'hamburger' menu on mobile, or a normal horizonta
 # -------------------------
 # font: '"Open sans"' # stands for the CSS 'font-family' property
 # heading_font: '"Roboto"' # as above, but for headings
-color: "#007500" # a color representative of your site (this is the green you see around)
+color: "#008100" # a color representative of your site (this is the green you see around)
 text_color: "#212121" # equals to 'black'
 background_color: "#f9f9f9" # equals to 'white'
-light_gray: "#e9ece9" # used, for example, as background-color for tags 
-dark_gray: "#515951" # used, for example, as background-color for footer
+light_gray: "#f4f5f4" # used, for example, as background-color for tags
+gray: "#f2f2f2"
+dark_gray: "#3f4b3f" # used, for example, as background-color for footer
 # black: ; # optional, if you want it to be different than text-color
 # white: ; optional, if you want it to be different than background-color
 
@@ -55,7 +56,7 @@ dark_gray: "#515951" # used, for example, as background-color for footer
 
 header: true # Show the site title, tagline and description in home page
 # header-image: false # this option is not available yet
-# sidebar: false # this option is not available yet
+# sidebar: true # this option is not available yet
 article_images: true # Show the featured images of articles in home page.
 excerpt_separator: <!--more--> # If you insert this tag in your post, only the content before <!--more--> will appear on the home page 
 paginate: 5 # Number of articles to show on home page before a pagination menu appears
