@@ -18,7 +18,7 @@ tagline: minimalist Jekyll theme # [OPTIONAL] just below the title in home
 description: "**More** is a minimalist theme for Jekyll, the static site generator. It provides a solid base to build a responsive, accessible, SEO-optimized website. Right now is mostly suited for blogs, but you know, we have plans."
 
 author: wu-mng  # This is the default author of the articles. Also shows in the footer.
-author_image: "og.png" # [OPTIONAL] Picture of the author. The default site image is used otherwise (see below)
+author_image: "assets/img/og.png" # [OPTIONAL] Picture of the author. The default site image is used otherwise (see below)
 email: wu-mng@example.com # [OPTIONAL] Default contact of the author.
 
 # ----------------------------------
@@ -106,7 +106,7 @@ defaults:
       path: ""
       type: authors
     values:
-      layout: author
+      layout: authors
   - 
     scope:
       path: ""

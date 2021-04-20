@@ -10,7 +10,7 @@
     {% endif %}
     <div class="post-meta">
       {% include author.html %}
-      {{ author_name }} •
+      {{ author_name }} <span style="color:{{ site.color }}">•</span>
       <time class="index-time" datetime="{{ post.date | date_to_xml_schema }}">
         {{ post.date | date_to_long_string }}
       </time>
