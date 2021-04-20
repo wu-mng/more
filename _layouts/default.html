@@ -1,12 +1,86 @@
 <!DOCTYPE html>
 <html lang="{{ site.locale | slice: 0,2 }}">
-{%- include head.html -%}
+
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="{{ site.paths.stylesheets | relative_url }}/style.css{{ site.time | date:'?v=%s' }}">
+  <link rel="icon" href="{{ '/favicon.ico' | relative_url }}">
+  <link rel="icon" href="{{ site.paths.icons | relative_url }}/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="{{ site.paths.icons | relative_url }}/apple.png">
+  <link rel="manifest" href="{{ site.paths.icons | relative_url }}/manifest.webmanifest">
+  <script src="{{ site.paths.scripts | relative_url }}/lightbox.js" defer></script>
+  {% feed_meta %}
+  {% seo %}  
+  {% unless page.excerpt.size > 0 %}
+  {%- capture description -%}
+    {%- if page.layout == "author" or page.layout == "post" or page.layout == "page" -%}
+      {{ page.content | truncate: 160 | markdownify | strip_html | normalize_whitespace | escape }}
+    {%- else -%}
+      {{ site.site_description }}
+    {%- endif -%}
+  {%- endcapture -%}
+  <meta name="description" content="{{ description }}" />
+  <meta property="og:description" content="{{ description }}" />
+  <meta itemprop="description" content="{{ description }}" />
+  {% endunless %}
+</head>
+
 <body>
-  {% include header.html %}
-  <div id="site-wrapper" class="wrapper flex-wrap {% if site.fixed_menu %} nav-fixed {% endif %}">
+  <header id="site-header" {% if site.fixed_menu %}class="fixed"{% endif %}>
+    <div class="wrapper flex-wrap">
+      <a href="{{ '/' | relative_url }}" class="site-title" aria-label="home page">{{ site.title }}</a>
+      <nav id="site-nav">
+        {% if site.hamburger_menu %}
+        <button class="hamburger" tabindex="-1">
+          <input type="checkbox" aria-label="toggle the mobile menu">
+          <span></span>
+          <span></span>
+          <span></span>
+          <div class="site-menu-mobile">
+          {% for item in site.navigation %}
+            <a href="{{ item[1] | relative_url }}" {% if page.url == item[1] %} class="current" {% endif %}>
+              {{ item[0] }}
+            </a>
+          {% endfor %}
+          </div>
+        </button>
+        {% endif %}        
+        <div {% if site.hamburger_menu %} class="site-menu" {% endif %}>
+          {% for item in site.navigation %}
+            <a href="{{ item[1] | relative_url }}" {% if page.url == item[1] %} class="current" {% endif %}>
+              {{ item[0] }}
+            </a>
+          {% endfor %}      
+        </div>      
+      </nav>  
+    </div>
+  </header>
+
+  {% if page.url == "/" and site.header == true %}
+    <section id="site-hero">
+      <div class="wrapper">
+        <h1 class="site-title">{{ site.title | markdownify | smartify | remove: "<p>" | remove: "</p>" }}</h1>
+        <p class="site-tagline">{{ site.tagline | markdownify | smartify | remove: "<p>" | remove: "</p>" }}</p>
+        <p class="site-description">{{ site.description | markdownify | smartify | remove: "<p>" | remove: "</p>" }}</p>
+      </div>
+    </section>
+  {% endif %}
+  
+  <div id="site-wrapper" class="wrapper flex-wrap {% if site.fixed_menu %}nav-fixed{% endif %}">
     {{ content }}
-    {% include lightbox.html %}
   </div>
+
+  <div id="lightbox" class="lightbox-off" aria-modal="true">
+    <button aria-label="Close" class="lightbox-close">×</button>
+    <figure class="lightbox-content">
+      <img alt="">
+      <figcaption>
+        <p></p>
+      </figcaption>
+    </figure>
+  </div>
+
   <footer id="main-footer">
     <div class="wrapper flex-wrap">
       <p>&#127279; {{ site.author }} {{ site.time | date: "%Y" }}</p>
