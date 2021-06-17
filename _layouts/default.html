@@ -17,7 +17,7 @@
     {%- if page.layout == "author" or page.layout == "post" or page.layout == "page" -%}
       {{ page.content | truncate: 160 | markdownify | strip_html | normalize_whitespace | escape }}
     {%- else -%}
-      {{ site.site_description }}
+      {{ site.description_default }}
     {%- endif -%}
   {%- endcapture -%}
   <meta name="description" content="{{ description }}" />
@@ -62,7 +62,7 @@
       <div class="wrapper">
         <h1 class="site-title">{{ site.title | markdownify | smartify | remove: "<p>" | remove: "</p>" }}</h1>
         <p class="site-tagline">{{ site.tagline | markdownify | smartify | remove: "<p>" | remove: "</p>" }}</p>
-        <p class="site-description">{{ site.description | markdownify | smartify | remove: "<p>" | remove: "</p>" }}</p>
+        <p class="site-description">{{ site.description_default | markdownify | smartify | remove: "<p>" | remove: "</p>" }}</p>
       </div>
     </section>
   {% endif %}
