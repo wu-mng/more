@@ -8,7 +8,7 @@ layout: default
       <h1 class="post-title">{{ author.name }}</h1>
       <div class="post-meta">
         {% if author.image %}
-          {% include image.html src=author.image size="thumb" class="avatar" %}
+          {% include image.html src=author.image class="img-thumb avatar" %}
         {% else %}
           <p class="avatar"></p>
         {% endif %}

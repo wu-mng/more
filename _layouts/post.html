@@ -10,7 +10,7 @@ layout: default
       {% endif %}
       <div class="post-meta">
         {% include author.html %}
-        {% include image.html src=author_image size="thumb" class="avatar" %}
+        {% include image.html src=author_image class="img-thumb avatar" %}
         <div>
           <time datetime="{{ page.date | date_to_xml_schema }}">
             {{ page.date | date_to_long_string }}
@@ -24,7 +24,7 @@ layout: default
     
     {% if page.image != site.defaults[0].values.image %}
       <div class="post-image">
-        {% include image.html size="medium" src=page.image alt=page.alt caption=page.caption %}
+        {% include image.html class="img-medium" src=page.image alt=page.alt caption=page.caption %}
       </div>  
     {% endif %}
     

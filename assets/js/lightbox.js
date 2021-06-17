@@ -1,5 +1,6 @@
-// TODO: get 'imageSizes' from _data/responsives.json
-const imageSizes = [160,320,480,640,960,1280,1920,2560];
+---
+layout: null
+---
 var lightBox = document.getElementById("lightbox");
 lightBox.addEventListener("click", toggleLightBox);
 
@@ -14,7 +15,6 @@ for (var i=0; i < thumbs.length; i++) {
       document.activeElement.click(); 
     } 
   }
-  //
   thumbs[i].addEventListener("click", toggleLightBoxAndAddImage);
 }
 
@@ -28,12 +28,7 @@ function toggleLightBoxAndAddImage(eventObj){
   lightBoxImage.src = "";
   lightBoxCaption.innerText = "";
   lightBoxImage.srcset = eventObj.target.srcset;
-  // TODO: get 'sizes' from _data/responsives.json
-  lightBoxImage.sizes = "(max-width: 535px) " + imageSizes[1] + "px," +   // 320px
-                        "(max-width: 767px) " + imageSizes[2] + "px," +   // 480px
-                        "(max-width: 991px) " + imageSizes[3] + "px," +  // 640px
-                        "(max-width: 1279px) " + imageSizes[4] + "px," +  // 960px
-                        imageSizes[5] + "px";                             // 1280px
+  lightBoxImage.sizes = `{{ site.responsive_images.lightbox_sizes }}`;
   lightBoxImage.src = eventObj.target.src;
   lightBoxImage.alt = eventObj.target.alt;
   lightBoxCaption.innerText = eventObj.target.nextElementSibling.innerText;

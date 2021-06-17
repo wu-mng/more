@@ -1,23 +1,21 @@
 {% capture default_image %} 
-  {{ site.defaults[0].values.image.path }} 
+  {{ site.default_image }} 
 {% endcapture %}
 
 {% capture width %}
-  {% case include.size %}
-    {% when "thumb" %}
-      {{ site.data.responsives.settings.srcset[0] }}
-    {% when "small" %}
-      {{ site.data.responsives.settings.srcset[1] }}
-    {% when "medium" %}
-      {{ site.data.responsives.settings.srcset[3] }}      
-  {% endcase %}
+  {% if include.class contains "img-thumb" %}
+      {{ site.responsive_images.thumb | strip }}
+    {% elsif include.class contains "img-small" %}
+      {{ site.responsive_images.small | strip }}
+    {% else %}
+      {{ site.responsive_images.medium | strip }}
+  {% endif %}
 {% endcapture %}
 
-{% if site.responsive_images %}
-
+{% if site.responsive_images.active %}
   {% capture srcset %}
     {% capture sizes %}
-      {%- for size in site.data.responsives.settings.srcset -%}
+      {%- for size in site.responsive_images.width -%}
         {{ site.paths.images | relative_url }}/{{ size | strip }}/{{ include.src | remove: 'assets/img/' | strip }} {{ size | strip }}w,
       {%- endfor -%}
     {% endcapture %}
@@ -25,25 +23,15 @@
   {% endcapture %}
 
   {% capture sizes %}
-    {% case include.size %}
-    {% when "thumb" %}
-      {{ site.data.responsives.settings.thumb | strip }}
-    {% when "small" %}
-      {{ site.data.responsives.settings.small | strip }}
-    {% when "medium" %}
-      {{ site.data.responsives.settings.medium | strip }}    
-    {% endcase %}
+    {% if include.class contains "img-thumb" %}
+      {{ site.responsive_images.thumb_sizes | strip }}
+    {% elsif include.class contains "img-small" %}
+      {{ site.responsive_images.small_sizes | strip }}
+    {% else %}
+        {{ site.responsive_images.medium_sizes | strip }}
+    {% endif %}  
   {% endcapture %}
-
 {% endif %}
-
-{% capture alt %}
-  {% if include.alt %}
-    {{ include.alt | strip_html | escape  }}
-  {% elsif include.caption %}
-    {{ include.caption | markdownify | strip_html | escape }}
-  {% endif %}
-{% endcapture %}
 
 {% capture accessibility %}
   {% if include.src == default_image or include.src == author_image %} 
@@ -54,20 +42,20 @@
 {% endcapture %}
 
 
-<figure class="img-{{ include.size | strip }} {{ include.class | strip }}" style="max-width:{{ width | strip }}px" {{ accessibility | strip }}>
-  <img  {% if site.responsive_images %} 
+<figure class="{{ include.class | default: "img-medium" | strip }} {{ page.class | strip }}" style="max-width:{{ width | strip }}px" {{ accessibility | strip }}>
+  <img  {% if site.responsive_images.active %} 
         srcset="{{ srcset | strip }}"
-        sizes="{{ sizes | strip }}" 
+        sizes="{{ sizes | strip }}"
         {% endif %}
-        src="{{ site.paths.images | relative_url }}/{%- if site.responsive_images -%}{{ width | strip }}/{%- endif -%}{{ include.src | remove: 'assets/img/' | strip }}" 
-        alt="{{ alt | strip }}"
+        src="{{ site.paths.images | relative_url }}/{%- if site.responsive_images.active -%}{{ width | strip }}/{%- endif -%}{{ include.src | remove: 'assets/img/' | strip }}"
+        alt="{{ include.alt | strip_html | escape }}"
         width="{{ width | strip }}"
         loading="lazy">
   <figcaption id="{{ include.src | strip }}">
     <p>{{ include.caption | markdownify | strip_html | escape }}</p>
   </figcaption>
-</figure>  
+</figure>
 
-{% comment %} 
-usage: {% include image.html src="filename.jpg" size="thumb/small/medium" alt="your alt text" caption="your caption" %}
+{% comment %}
+usage: {% include image.html src="filename.jpg" class="[img-thumb|img-small| default: img-medium]" alt="your alt text" caption="your caption" %}
 {% endcomment %}
