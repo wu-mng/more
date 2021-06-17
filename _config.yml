@@ -5,21 +5,19 @@
 # ------------------------
 # 1. Site Setup [REQUIRED]
 # ------------------------
-# Be sure to fill the fields below (unless they're marked as [OPTIONAL]),  
-# even if you don't plan to use them as visual elements (e.g. the title in home page), 
-# since they are very much necessary for SEO purposes
+# Be sure to fill the fields below (unless they're marked as [OPTIONAL])
+# even if you don't plan to use them, since they are needed for SEO purposes
 
 locale: en_US # Language of the site, the format is language_TERRITORY
-url: "https://wu-mng.github.io" # URL of the site. Needed to generate absolute links like RSS feed, OG images
+url: "https://wu-mng.github.io" # URL of the site. Used for absolute links like RSS feed, OG images
 
-title: More # name of the website. Used for branding, like in navbar and home page.
+title: More # name of the website. For branding, e.g. in navbar and home page
 tagline: minimalist Jekyll theme # [OPTIONAL] just below the title in home
-# description, just below the tagline in home page
-description: "**More** is a minimalist theme for Jekyll, the static site generator. It provides a solid base to build a responsive, accessible, SEO-optimized website. Right now is mostly suited for blogs, but you know, we have plans."
+description_default: "**More** is a minimalist theme for Jekyll, the static site generator. It provides a solid base to build a responsive, accessible, SEO-optimized website. Right now is mostly suited for blogs, but you know, we have plans." # description, just below the tagline in home page
 
-author: wu-mng  # This is the default author of the articles. Also shows in the footer.
-author_image: "assets/img/og.png" # [OPTIONAL] Picture of the author. The default site image is used otherwise (see below)
-email: wu-mng@example.com # [OPTIONAL] Default contact of the author.
+author: wu-mng # This is the default author of the articles. Also shows up in the footer
+author_image: "assets/img/og.png" # [OPTIONAL] Picture of the author. A default site image is used otherwise (see section 5. below)
+email: wu-mng@example.com # [OPTIONAL] Default contact of the author
 
 # ----------------------------------
 # 2. Site Navigation Menu [OPTIONAL]
@@ -41,7 +39,7 @@ hamburger_menu: true # show an 'hamburger' menu on mobile, or a normal horizonta
 # -------------------------
 # font: '"Open sans"' # stands for the CSS 'font-family' property
 # heading_font: '"Roboto"' # as above, but for headings
-color: "#008100" # a color representative of your site (this is the green you see around)
+color: "#008100" # a color representative of your site (this is the 'green' you see around)
 text_color: "#212121" # equals to 'black'
 background_color: "#f9f9f9" # equals to 'white'
 light_gray: "#f4f5f4" # used, for example, as background-color for tags
@@ -64,8 +62,24 @@ paginate: 5 # Number of articles to show on home page before a pagination menu a
 # --------------------
 # 5. Images [OPTIONAL]
 # --------------------
+default_image: &default_image "assets/img/more_open_graph_default_image.png" # An image representative of your brand; it will be the default featured and open graph image [suggested size: 1200x630px] 
 
-responsive_images: false # see https://wu-mng.github.io/more/layout/layout-responsive-images for more informations
+responsive_images: 
+  active: true # see https://wu-mng.github.io/more/layout/layout-responsive-images for more informations
+
+# ---------------------------------------
+# 6. Jekyll Configuration [VERY OPTIONAL] 
+# ---------------------------------------
+# Don't touch the values below, unless you know what you're doing.
+
+  width: [&thumb 160,&small 320,480,&medium 640,960,1280,1920,2560] # copies of a responsive image  
+  thumb_sizes: "160px" # serve the 160px copy at any screen width
+  small_sizes: "320px" # serve the 320px copy at any screen width
+  medium_sizes: "(max-width: 535px) 320px, 640px" # if the screen is <= 535px serve the 320px copy, otherwise the 640px copy   
+  lightbox_sizes: "(max-width: 535px) 320px, (max-width: 767px) 480px,(max-width: 991px) 640px,(max-width: 1279px) 960px, 1280px" # and so on...
+  thumb: *thumb
+  small: *small
+  medium: *medium
 
 defaults:
   - 
@@ -73,15 +87,9 @@ defaults:
       path: ""
     values:
       image: # Default site image used for open graph (social sharing) when a post 'featured' image is not present.
-        path: "assets/img/more_open_graph_default_image.png" 
+        path: *default_image 
         height: 630
         width: 1200
-
-# ---------------------------------------
-# 6. Jekyll Configuration [VERY OPTIONAL] 
-# ---------------------------------------
-# Don't touch the values below, unless you know what you're doing.
-
   - 
     scope:
       path: ""
