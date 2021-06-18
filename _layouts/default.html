@@ -26,7 +26,7 @@
   {% endunless %}
 </head>
 
-<body>
+<body {% if site.fixed_menu %}class="fixed-header"{% endif %}>
   <header id="site-header" {% if site.fixed_menu %}class="fixed"{% endif %}>
     <div class="wrapper flex-wrap">
       <a href="{{ '/' | relative_url }}" class="site-title" aria-label="home page">{{ site.title }}</a>

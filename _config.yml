@@ -65,7 +65,7 @@ paginate: 5 # Number of articles to show on home page before a pagination menu a
 default_image: &default_image "assets/img/more_open_graph_default_image.png" # An image representative of your brand; it will be the default featured and open graph image [suggested size: 1200x630px] 
 
 responsive_images: 
-  active: true # see https://wu-mng.github.io/more/layout/layout-responsive-images for more informations
+  active: false # see https://wu-mng.github.io/more/layout/layout-responsive-images for more informations
 
 # ---------------------------------------
 # 6. Jekyll Configuration [VERY OPTIONAL] 
