@@ -42,7 +42,7 @@
 {% endcapture %}
 
 
-<figure class="{{ include.class | default: 'img-medium' | strip }} {% if include.src == page.image %}{{ page.class | strip }}{% endif %}" style="max-width:{{ width | strip }}px" {{ accessibility | strip }}>
+<figure class="{{ include.class | strip }}{% if include.src == page.image %} {{ page.class | strip }}{% endif %}" style="max-width:{{ width | strip }}px" {{ accessibility | strip }}>
   <img  {% if site.responsive_images.active %} 
         srcset="{{ srcset | strip }}"
         sizes="{{ sizes | strip }}"
