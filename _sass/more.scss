@@ -877,6 +877,9 @@ sup, .footnotes ol li {
     align-items: center;
     @include typography(1, 1.2);
   }
+  .post-image {
+    @include baseline(0.5);
+  }
 }
 
 .avatar { 
@@ -1086,12 +1089,6 @@ sup, .footnotes ol li {
     margin-left: 1.5rem;
     margin-right: 1rem;
     text-align: right;
-  }
-}
-
-.img-medium { 
-  @include tablet {
-    @include baseline; 
   }
 }
 

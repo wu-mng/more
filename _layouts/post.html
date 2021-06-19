@@ -23,9 +23,7 @@ layout: default
     </header>
     
     {% if page.image != site.defaults[0].values.image %}
-      <div class="post-image">
-        {% include image.html class="img-medium" src=page.image alt=page.alt caption=page.caption %}
-      </div>  
+      {% include image.html class="post-image" src=page.image alt=page.alt caption=page.caption %}
     {% endif %}
     
     <div class="post-article">
