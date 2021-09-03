@@ -56,7 +56,7 @@ fs.readFile(res, 'utf8', (err, data) => {
               } else if (metadata.format == 'png') {
                 return image
                   .resize({width: metadata.width, withoutEnlargement: true})
-                  .png({ progressive: true })
+                  .png({ compressionLevel: 9 })
                   .toFile(`${des}/${name}.png`);
               }
           });
@@ -92,7 +92,7 @@ fs.readFile(res, 'utf8', (err, data) => {
                 } else if (metadata.format == 'png') {
                   return image
                     .resize({width: size, withoutEnlargement: true})
-                    .png({ progressive: true })
+                    .png({ compressionLevel: 9 })
                     .toFile(`${des}/${size}/${name}.png`);
                 }              
               }            
